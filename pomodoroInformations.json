@@ -1,0 +1,22 @@
+{
+    "Pomodoro 25/5": {
+        "workingtime": "25",
+        "resttime": "5",
+        "cycle": "5"
+    },
+    "Pomodoro 30/10": {
+        "workingtime": "10",
+        "resttime": "5",
+        "cycle": "5"
+    },
+    "Pomodoro 45/15": {
+        "workingtime": "25",
+        "resttime": "5",
+        "cycle": "5"
+    },
+    "Pomodoro 50/10": {
+        "workingtime": "10",
+        "resttime": "5",
+        "cycle": "5"
+    }
+}
