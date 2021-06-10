@@ -23,16 +23,16 @@ require_once('functions.php');
         <div class="row">
             <p>Voici les POMODORO les plus populaires : </p>
             <div class="col">
-                <button id="10/5" class="btn btn-danger"> POMODORO 10/5</button>
+                <button id="10/5" class="btn btn-danger"> POMODORO 25/5</button>
             </div>
             <div class="col">
-                <button class="btn btn-danger"> POMODORO 20/5</button>
+                <button class="btn btn-danger"> POMODORO 30/10</button>
             </div>
             <div class="col">
-                <button class="btn btn-danger"> POMODORO 30/5</button>
+                <button class="btn btn-danger"> POMODORO 45/15</button>
             </div>
             <div class="col">
-                <button class="btn btn-danger"> POMODORO 50/5</button>
+                <button class="btn btn-danger"> POMODORO 50/10</button>
             </div>
         </div>
         <div class="row mt-5">
