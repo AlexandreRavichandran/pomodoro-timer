@@ -30,7 +30,7 @@ require_once('functions.php');
             <div class="col bg-secondary">
                 <h2 class="text-center"> Lancer le POMODORO Timer </h2>
                 <img src="images/clock.gif" alt="" class="d-block ml-auto mr-auto text-center">
-                <a href="pomodoro.php" class="btn btn-success d-block ml-auto w-50 mr-auto mt-4"> Lancer le POMODORO Timer </a>
+                <a href="pomodoro_set.php" class="btn btn-success d-block ml-auto w-50 mr-auto mt-4"> Lancer le POMODORO Timer </a>
             </div>
         </div>
     </div>
