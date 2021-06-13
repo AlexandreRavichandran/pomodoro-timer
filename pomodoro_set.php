@@ -35,29 +35,32 @@ require_once('functions.php');
             <div class="col">
                 <button id="50/10" class="btn btn-danger"> POMODORO 50/10</button>
             </div>
+            <div class="col">
+                <button id="personalized" class="btn btn-danger"> PERSONNALISE </button>
+            </div>
         </div>
         <div class="row mt-4">
             <p id="remplir" class="text-center"> Choisissez un pomodoro pour avoir les détails sur celui ci . </p>
-            <p id="pomodoro_explaination">Ce pomodoro se compose de <span class="selected_pomodoro_cycle"> 5 </span> cycles. Un cycle se compose de <span class="selected_pomodoro_worktime"></span> minutes de travail, ainsi que <span class="selected_pomodoro_restime"></span> minutes de pause.</p>
+            <p id="pomodoro_explaination">Ce pomodoro se compose de <span class="selected_pomodoro_cycle"></span> cycles. Un cycle se compose de <span class="selected_pomodoro_worktime"></span> minutes de travail, ainsi que <span class="selected_pomodoro_restime"></span> minutes de pause.</p>
         </div>
         <div class="row mt-5">
-            <table class="me-auto ms-auto border ">
+            <table class="me-auto ms-auto border w-25">
                 <tbody class="p-4">
                     <tr>
                         <th>POMODORO selectionné </th>
-                        <td class="selected_pomodoro_name"></td>
+                        <td class=" text-center selected_pomodoro_name"></td>
                     </tr>
                     <tr>
                         <th>Temps de travail (minutes)</th>
-                        <td class="selected_pomodoro_worktime"></td>
+                        <td class=" text-center selected_pomodoro_worktime"></td>
                     </tr>
                     <tr>
                         <th>Temps de pause (minutes)</th>
-                        <td class="selected_pomodoro_restime"></td>
+                        <td class=" text-center selected_pomodoro_restime"></td>
                     </tr>
                     <tr>
                         <th>Definissez un cycle</th>
-                        <td class="selected_pomodoro_cycle"></td>
+                        <td class=" text-center selected_pomodoro_cycle"></td>
                     </tr>
                 </tbody>
             </table>
@@ -72,6 +75,7 @@ require_once('functions.php');
         </div>
     </div>
     <script src="assets/app.js"></script>
+    <p id="ok" class="bg-secondary"></p>
 </body>
 
 </html>
