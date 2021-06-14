@@ -44,38 +44,43 @@ require_once('functions.php');
             <p id="pomodoro_explaination">Ce pomodoro se compose de <span class="selected_pomodoro_cycle"></span> cycles. Un cycle se compose de <span class="selected_pomodoro_worktime"></span> minutes de travail, ainsi que <span class="selected_pomodoro_restime"></span> minutes de pause.</p>
         </div>
         <div class="row mt-5">
-            <table class="me-auto ms-auto border w-25">
+            <table class="me-auto ms-auto border w-50">
                 <tbody class="p-4">
-                    <tr>
+                    <tr class="mb-2">
                         <th>POMODORO selectionné </th>
                         <td class=" text-center selected_pomodoro_name"></td>
                     </tr>
-                    <tr>
+                    <tr class="mb-2">
                         <th>Temps de travail (minutes)</th>
                         <td class=" text-center selected_pomodoro_worktime"></td>
                     </tr>
-                    <tr>
+                    <tr class="mb-2">
                         <th>Temps de pause (minutes)</th>
                         <td class=" text-center selected_pomodoro_restime"></td>
                     </tr>
-                    <tr>
-                        <th>Definissez un cycle</th>
+                    <tr class="mb-2">
+                        <th>Cycle</th>
                         <td class=" text-center selected_pomodoro_cycle"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="row mt-4">
+            <p class="total_time text-center">Durée totale du pomodoro : <span id="total_time"></span></p>
+        </div>
         <div class="row">
             <div class="col">
-                <form action="#" method="post" id="pomodoro_sending_form" class="d-flex justify-content-center mt-4">
-                    <input type='hidden' name='pomodoro-name' value='#'>
+                <form action="pomodoro_timer.php" method="post" id="pomodoro_sending_form" class="d-flex justify-content-center mt-4">
+                    <input id="selected_pomodoro_name" type='hidden' name='selected_pomodoro_name' value='#'>
+                    <input id="selected_pomodoro_worktime" type='hidden' name='selected_pomodoro_worktime' value='#'>
+                    <input id="selected_pomodoro_restime" type='hidden' name='selected_pomodoro_resttime' value='#'>
+                    <input id="selected_pomodoro_cycle" type='hidden' name='selected_pomodoro_cycle' value='#'>
                     <button type='submit' class=" btn btn-primary"> Commencer le Pomodoro</button>
                 </form>
             </div>
         </div>
     </div>
     <script src="assets/app.js"></script>
-    <p id="ok" class="bg-secondary"></p>
 </body>
 
 </html>

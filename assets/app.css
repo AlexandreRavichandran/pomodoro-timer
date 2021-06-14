@@ -1,0 +1,32 @@
+body{
+    font-size:15px;
+}
+
+#pomodoro_explaination{
+    font-size:1.3em;
+}
+tbody th{
+font-size: 1.3em;
+text-align: center;
+}
+
+tbody tr .selected_pomodoro_name,
+tbody tr .selected_pomodoro_worktime,
+tbody tr .selected_pomodoro_restime,
+tbody tr .selected_pomodoro_cycle{
+    font-size:1.3em;
+}
+
+.total_time, #total_time{
+    font-size:1.5em;
+}
+
+#cycle_timer{
+    font-size:8em;
+}
+
+
+.step_number{
+    list-style-type: none;
+    font-weight: bold;
+}
