@@ -64,7 +64,7 @@ $selectedPomodoro = [
         let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
         let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        timer(worktime, restime, cycle);
+        timer(worktime, resttime, cycle);
     </script>
 
 </body>
