@@ -76,7 +76,20 @@ function convertMinutesToHours(total_time) {
  * @param {integer} worktime 
  * @param {integer} resttime 
  */
-function timer() {
+function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
+    if (!window.cycle) {
+        window.cycle = 0;
+        console.log('initialization')
+    }
+    if (evenOrNot(loop)) {
+        document.getElementById('pomodoro_cycle_minute').innerHTML = timer_restting_time;
+        console.log("pause cycle " + window.cycle)
+    } else {
+        document.getElementById('pomodoro_cycle_minute').innerHTML = timer_working_time;
+        window.cycle++;
+        colorCycleBoxes(window.cycle)
+        console.log("work cycle " + window.cycle)
+    }
     let sec = 00;
     let inter = setInterval(() => {
         sec--;
@@ -88,7 +101,38 @@ function timer() {
         }
         if (document.getElementById('pomodoro_cycle_second').innerHTML == 0 && document.getElementById('pomodoro_cycle_minute').innerHTML == 0) {
             clearInterval(inter);
-        }
-    }, 1000);
+            loop++;
+            console.log("boucle = " + loop)
+            if (window.cycle === cycle) {
+                console.log(window.cycle);
+                console.log('pomodoro done');
+            } else {
+                timer(timer_working_time, timer_restting_time, cycle, loop);
 
+            }
+
+
+        }
+
+    }, 200);
+
+}
+
+/**
+ * Function to check whether a number is even or odd (useful to distinguish worktime and resttime on pomodoro timer)
+ * Typically, odd loop = worktime ; even loop = resttime
+ * @param {integer} number 
+ * @returns {boolean}
+ */
+function evenOrNot(number) {
+    if (number % 2 === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function colorCycleBoxes(cycle) {
+    document.getElementById("cycle " + cycle).style.backgroundColor = 'yellow';
 }
