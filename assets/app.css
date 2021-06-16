@@ -30,3 +30,7 @@ tbody tr .selected_pomodoro_cycle{
     list-style-type: none;
     font-weight: bold;
 }
+
+#alert{
+    display:none;
+}
