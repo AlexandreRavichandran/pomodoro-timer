@@ -66,7 +66,7 @@ $selectedPomodoro = [
         let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
         let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        countdownTimer(worktime, resttime, cycle);
+        countdownTimer(1, 1, 4);
         totalTimer();
     </script>
 
