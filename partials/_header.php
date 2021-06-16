@@ -9,10 +9,10 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?php addActiveClassNavbar('index') ?>" href="index.php">Accueil</a>
+                        <a class="nav-link <?php addActiveClassNavbar('index') ?> text-center" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php addActiveClassNavbar('pomodoro') ?>" href="pomodoro.php">Utiliser</a>
+                        <a class="nav-link <?php addActiveClassNavbar('pomodoro') ?>text-center" href="pomodoro_set.php">Utiliser</a>
                     </li>
                 </ul>
             </div>

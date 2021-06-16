@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 document.getElementById("25/5").addEventListener("click", function () {
+    displayPomodoroInformations("Pomodoro_25/5");
 });
 document.getElementById("30/10").addEventListener("click", function () {
     displayPomodoroInformations("Pomodoro_30/10");
@@ -124,6 +125,7 @@ function countdownTimer(timer_working_time, timer_restting_time, cycle, loop = 1
                 colorCycleBoxes(window.cycle, "done")
                 console.log('pomodoro done');
                 showAlert("end", "worktime");
+                clearInterval(window.total_time);
             } else {
                 countdownTimer(timer_working_time, timer_restting_time, cycle, window.loop);
             }
@@ -143,7 +145,7 @@ function totalTimer() {
     let second_space = document.getElementById("pomodoro_total_second");
     let minute_space = document.getElementById('pomodoro_total_minute');
     let hour_space = document.getElementById('pomodoro_total_hour');
-    let total_time = setInterval(function () {
+    window.total_time = setInterval(function () {
         sec++;
         if (sec > 59) {
             sec = 0;
@@ -178,7 +180,7 @@ function colorCycleBoxes(cycle, status) {
             break;
 
         case "done":
-            color = 'green';
+            color = '#AAFB7B';
             break;
     }
     if (document.getElementById("cycle " + cycle)) {

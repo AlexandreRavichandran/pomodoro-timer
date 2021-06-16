@@ -35,14 +35,14 @@ $selectedPomodoro = [
         <div class="row d-flex justify-content-center">
             <p id="alert" class="p-4 w-75 rounded text-center text-white h4"></p>
         </div>
-        <div class="row">
+        <div class="row pictures">
             <img src="http://placehold.it/1000x300" alt="">
         </div>
         <div class="row">
             <p id="cycle_timer" class="text-center"><span id="pomodoro_cycle_hour">00</span> : <span id="pomodoro_cycle_minute"><?php echo $selectedPomodoro['worktime'] ?></span> : <span id="pomodoro_cycle_second">00</span></p>
         </div>
         <div class="row">
-            <p class="text-center">Temps total : <span id="total_time"> <span id="pomodoro_total_hour">00</span> : <span id="pomodoro_total_minute">00</span> : <span id="pomodoro_total_second">00</span></span></p>
+            <p id="total_time" class="text-center">Temps total : <span id="pomodoro_total_hour">00</span> : <span id="pomodoro_total_minute">00</span> : <span id="pomodoro_total_second">00</span></p>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-end">
@@ -58,9 +58,9 @@ $selectedPomodoro = [
         <audio id="audio">
             <source src="medias/audio/boucle_end_sound.ogg" type="audio/ogg">
         </audio>
-        <button onclick="playAudio()" id="activateAudio"> oui</button>
+        <button class="d-none" onclick="playAudio()" id="activateAudio"> oui</button>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="assets/app.js"></script>
     <script>
         let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
