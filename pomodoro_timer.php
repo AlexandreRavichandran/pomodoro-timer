@@ -1,11 +1,11 @@
 <?php
 require_once('functions.php');
-$selectedPomodoro = [
+/*$selectedPomodoro = [
     "name" => htmlspecialchars($_POST['selected_pomodoro_name']),
     "worktime" => htmlspecialchars($_POST['selected_pomodoro_worktime']),
     "resttime" => htmlspecialchars($_POST['selected_pomodoro_resttime']),
     "cycle" => htmlspecialchars($_POST['selected_pomodoro_cycle']),
-]
+]*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
