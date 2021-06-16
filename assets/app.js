@@ -30,36 +30,7 @@ document.getElementById("50/10").addEventListener("click", function () {
 
 // FUNCTIONS LIBRARY
 
-/**
- * AJAX function to get datas about pomodoro when we click on each button (datas on Json file)
- * @param {string} pomodoro_name
- */
-function displayPomodoroInformations(pomodoro_name) {
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.overrideMimeType("application/json");
-    xhttp.open("GET", "pomodoroinformations.json");
-
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == "200") {
-            let infos = JSON.parse(xhttp.responseText);
-            document.getElementsByClassName("selected_pomodoro_name")[0].innerHTML = infos[pomodoro_name]["name"];
-            for (let i = 0; i < 2; i++) {
-                document.getElementsByClassName("selected_pomodoro_worktime")[i].innerHTML = infos[pomodoro_name]["worktime"];
-                document.getElementsByClassName("selected_pomodoro_restime")[i].innerHTML = infos[pomodoro_name]["resttime"];
-                document.getElementsByClassName("selected_pomodoro_cycle")[i].innerHTML = infos[pomodoro_name]["cycle"];
-                document.getElementById("selected_pomodoro_name").setAttribute("value", pomodoro_name);
-                document.getElementById("selected_pomodoro_worktime").setAttribute("value", infos[pomodoro_name]["worktime"]);
-                document.getElementById("selected_pomodoro_restime").setAttribute("value", infos[pomodoro_name]["resttime"]);
-                document.getElementById("selected_pomodoro_cycle").setAttribute("value", infos[pomodoro_name]["cycle"]);
-                let total_time = (infos[pomodoro_name]["worktime"] * infos[pomodoro_name]["cycle"] + infos[pomodoro_name]["resttime"] * (infos[pomodoro_name]["cycle"] - 1))
-                document.getElementById("total_time").innerHTML = convertMinutesToHours(total_time);
-            }
-        }
-
-    }
-    xhttp.send(null);
-}
+// General functions
 
 /**
  * Function to convert minutes into a hours format (H:i:s)
@@ -73,6 +44,36 @@ function convertMinutesToHours(total_time) {
     let converted_hours = hours + " h " + minutes + " m.";
     return converted_hours;
 }
+
+/**
+ * Function to check whether a number is even or odd (useful to distinguish worktime and resttime on pomodoro timer)
+ * Typically, odd loop = worktime ; even loop = resttime
+ * @param {number} number 
+ * @returns boolean
+ */
+function evenOrNot(number) {
+    if (number % 2 === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Function to add a "0" before number when the number is strictly smaller than 10
+ * @param {number} number
+ * @returns mixed
+ */
+function addZeroWhenUnderTen(number) {
+    if (number < 10) {
+        return "0" + number;
+
+    } else {
+        return number;
+    }
+}
+
+// Timer functions 
 
 /**
  * Function to apply the countdown timer following a workting time, resting time, number of cycles and automatically setted loop
@@ -133,18 +134,36 @@ function countdownTimer(timer_working_time, timer_restting_time, cycle, loop = 1
 }
 
 /**
- * Function to check whether a number is even or odd (useful to distinguish worktime and resttime on pomodoro timer)
- * Typically, odd loop = worktime ; even loop = resttime
- * @param {number} number 
- * @returns boolean
+ * Function to apply the timer to display the total pomodoro time
  */
-function evenOrNot(number) {
-    if (number % 2 === 0) {
-        return true;
-    } else {
-        return false;
-    }
+function totalTimer() {
+    let sec = 0;
+    let minute = 0;
+    let hour = 0;
+    let second_space = document.getElementById("pomodoro_total_second");
+    let minute_space = document.getElementById('pomodoro_total_minute');
+    let hour_space = document.getElementById('pomodoro_total_hour');
+    let total_time = setInterval(function () {
+        sec++;
+        if (sec > 59) {
+            sec = 0;
+            minute++;
+            if (minute > 59) {
+                minute = 0;
+                hour++;
+                hour_space.innerHTML = addZeroWhenUnderTen(hour);
+            }
+            minute_space.innerHTML = addZeroWhenUnderTen(minute);
+        }
+        second_space.innerHTML = addZeroWhenUnderTen(sec);
+
+
+
+    }, 1000)
+
 }
+
+// Design functions
 
 /**
  * Function to style a cycle box when a pomodoro cycle is completed
@@ -166,21 +185,6 @@ function colorCycleBoxes(cycle, status) {
         document.getElementById("cycle " + cycle).style.backgroundColor = color;
     }
 }
-
-/**
- * Function to add a "0" before number when the number is strictly smaller than 10
- * @param {number} number
- * @returns mixed
- */
-function addZeroWhenUnderTen(number) {
-    if (number < 10) {
-        return "0" + number;
-
-    } else {
-        return number;
-    }
-}
-
 
 /**
  * Function to update the alert following the current loop
@@ -236,6 +240,8 @@ function showAlert(status, previous_status) {
     alertBox.innerHTML = alert;
 }
 
+// Audio functions 
+
 /**
  * Function used to play the audio file when a loop is done 
  */
@@ -254,30 +260,51 @@ function clicksoundButton() {
     button.click();
 }
 
+// AJAX functions 
 
-function totalTimer() {
-    let sec = 0;
-    let minute = 0;
-    let hour = 0;
-    let second_space = document.getElementById("pomodoro_total_second");
-    let minute_space = document.getElementById('pomodoro_total_minute');
-    let hour_space = document.getElementById('pomodoro_total_hour');
-    let total_time = setInterval(function () {
-        sec++;
-        if (sec > 59) {
-            sec = 0;
-            minute++;
-            if (minute > 59) {
-                minute = 0;
-                hour++;
-                hour_space.innerHTML = addZeroWhenUnderTen(hour);
+/**
+ * AJAX function to get datas about pomodoro when we click on each button (datas on Json file)
+ * @param {string} pomodoro_name
+ */
+function displayPomodoroInformations(pomodoro_name) {
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.overrideMimeType("application/json");
+    xhttp.open("GET", "pomodoroinformations.json");
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == "200") {
+            let infos = JSON.parse(xhttp.responseText);
+            document.getElementsByClassName("selected_pomodoro_name")[0].innerHTML = infos[pomodoro_name]["name"];
+            for (let i = 0; i < 2; i++) {
+                document.getElementsByClassName("selected_pomodoro_worktime")[i].innerHTML = infos[pomodoro_name]["worktime"];
+                document.getElementsByClassName("selected_pomodoro_restime")[i].innerHTML = infos[pomodoro_name]["resttime"];
+                document.getElementsByClassName("selected_pomodoro_cycle")[i].innerHTML = infos[pomodoro_name]["cycle"];
+                document.getElementById("selected_pomodoro_name").setAttribute("value", pomodoro_name);
+                document.getElementById("selected_pomodoro_worktime").setAttribute("value", infos[pomodoro_name]["worktime"]);
+                document.getElementById("selected_pomodoro_restime").setAttribute("value", infos[pomodoro_name]["resttime"]);
+                document.getElementById("selected_pomodoro_cycle").setAttribute("value", infos[pomodoro_name]["cycle"]);
+                let total_time = (infos[pomodoro_name]["worktime"] * infos[pomodoro_name]["cycle"] + infos[pomodoro_name]["resttime"] * (infos[pomodoro_name]["cycle"] - 1))
+                document.getElementById("total_time").innerHTML = convertMinutesToHours(total_time);
             }
-            minute_space.innerHTML = addZeroWhenUnderTen(minute);
         }
-        second_space.innerHTML = addZeroWhenUnderTen(sec);
 
-
-
-    }, 1000)
-
+    }
+    xhttp.send(null);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
