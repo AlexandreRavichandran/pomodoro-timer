@@ -83,7 +83,7 @@ function convertMinutesToHours(total_time) {
  * @param {number} loop  //setted automatically
  * @returns void
  */
-function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
+function countdownTimer(timer_working_time, timer_restting_time, cycle, loop = 1) {
     window.loop = loop;
     if (!window.cycle) {
         window.cycle = 0;
@@ -106,7 +106,7 @@ function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
 
     }
     let sec = 00;
-    window.inter = setInterval(() => {
+    window.inter = setInterval(function () {
         sec--;
         document.getElementById('pomodoro_cycle_second').innerHTML = addZeroWhenUnderTen(sec);
         if (sec < 0) {
@@ -124,11 +124,11 @@ function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
                 console.log('pomodoro done');
                 showAlert("end", "worktime");
             } else {
-                timer(timer_working_time, timer_restting_time, cycle, window.loop);
+                countdownTimer(timer_working_time, timer_restting_time, cycle, window.loop);
             }
         }
 
-    }, 200);
+    }, 1000);
 
 }
 
@@ -236,12 +236,48 @@ function showAlert(status, previous_status) {
     alertBox.innerHTML = alert;
 }
 
+/**
+ * Function used to play the audio file when a loop is done 
+ */
 function playAudio() {
     let audio = document.getElementById("audio");
     audio.play();
 }
 
+/**
+ * Function used to simulate a user's interaction, to play the audio.
+ * (Google's policy forbid website to play audios without a user toggle it, so this function simulate a user's interaction)
+ * https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+ */
 function clicksoundButton() {
     let button = document.getElementById("activateAudio");
     button.click();
+}
+
+
+function totalTimer() {
+    let sec = 0;
+    let minute = 0;
+    let hour = 0;
+    let second_space = document.getElementById("pomodoro_total_second");
+    let minute_space = document.getElementById('pomodoro_total_minute');
+    let hour_space = document.getElementById('pomodoro_total_hour');
+    let total_time = setInterval(function () {
+        sec++;
+        if (sec > 59) {
+            sec = 0;
+            minute++;
+            if (minute > 59) {
+                minute = 0;
+                hour++;
+                hour_space.innerHTML = addZeroWhenUnderTen(hour);
+            }
+            minute_space.innerHTML = addZeroWhenUnderTen(minute);
+        }
+        second_space.innerHTML = addZeroWhenUnderTen(sec);
+
+
+
+    }, 1000)
+
 }

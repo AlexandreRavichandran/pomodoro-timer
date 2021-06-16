@@ -39,10 +39,10 @@ $selectedPomodoro = [
             <img src="http://placehold.it/1000x300" alt="">
         </div>
         <div class="row">
-            <p id="cycle_timer" class="text-center"><span id="pomodoro_cycle_hour">00</span> : <span id="pomodoro_cycle_minute"><?php echo $selectedPomodoro['worktime'] ?></span> : <span id="pomodoro_cycle_second"></span></p>
+            <p id="cycle_timer" class="text-center"><span id="pomodoro_cycle_hour">00</span> : <span id="pomodoro_cycle_minute"><?php echo $selectedPomodoro['worktime'] ?></span> : <span id="pomodoro_cycle_second">00</span></p>
         </div>
         <div class="row">
-            <p class="text-center">Temps total : <span id="total_time"> <span id="pomodoro_total_hour"></span> : <span id="pomodoro_total_minute"></span> : <span id="pomodoro_total_second"></span></span></p>
+            <p class="text-center">Temps total : <span id="total_time"> <span id="pomodoro_total_hour">00</span> : <span id="pomodoro_total_minute">00</span> : <span id="pomodoro_total_second">00</span></span></p>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-end">
@@ -66,7 +66,8 @@ $selectedPomodoro = [
         let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
         let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        timer(1, 1, cycle);
+        countdownTimer(1, 1, cycle);
+        totalTimer();
     </script>
 
 </body>
