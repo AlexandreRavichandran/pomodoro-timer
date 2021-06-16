@@ -61,7 +61,8 @@ function displayPomodoroInformations(pomodoro_name) {
 
 /**
  * Function to convert minutes into a hours format (H:i:s)
- * @param {integer} total_time 
+ * @param {number} total_time 
+ * @returns string
  */
 function convertMinutesToHours(total_time) {
     let hours = Math.floor(total_time / 60);
@@ -72,57 +73,61 @@ function convertMinutesToHours(total_time) {
 }
 
 /**
- *  * Function to set a timer for one cycle
- * @param {integer} worktime 
- * @param {integer} resttime 
+ * Function to apply the countdown timer following a workting time, resting time, number of cycles and automatically setted loop
+ * 
+ * @param {number} timer_working_time 
+ * @param {number} timer_restting_time 
+ * @param {number} cycle 
+ * @param {number} loop  //setted automatically
+ * @returns void
  */
 function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
+    window.loop = loop;
     if (!window.cycle) {
         window.cycle = 0;
         console.log('initialization')
     }
-    if (evenOrNot(loop)) {
-        document.getElementById('pomodoro_cycle_minute').innerHTML = timer_restting_time;
+    if (evenOrNot(window.loop)) {
+        document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_restting_time);
         console.log("pause cycle " + window.cycle)
     } else {
-        document.getElementById('pomodoro_cycle_minute').innerHTML = timer_working_time;
+        document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_working_time);
         window.cycle++;
-        colorCycleBoxes(window.cycle)
+        colorCycleBoxes(window.cycle, "current")
+        colorCycleBoxes(window.cycle - 1, "done")
         console.log("work cycle " + window.cycle)
     }
     let sec = 00;
-    let inter = setInterval(() => {
+    window.inter = setInterval(() => {
         sec--;
-        document.getElementById('pomodoro_cycle_second').innerHTML = sec;
+        document.getElementById('pomodoro_cycle_second').innerHTML = addZeroWhenUnderTen(sec);
         if (sec < 0) {
             sec = 59;
-            document.getElementById('pomodoro_cycle_second').innerHTML = sec;
-            document.getElementById('pomodoro_cycle_minute').innerHTML--;
+            document.getElementById('pomodoro_cycle_second').innerHTML = addZeroWhenUnderTen(sec);
+            document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(document.getElementById('pomodoro_cycle_minute').innerHTML - 1);
         }
         if (document.getElementById('pomodoro_cycle_second').innerHTML == 0 && document.getElementById('pomodoro_cycle_minute').innerHTML == 0) {
             clearInterval(inter);
-            loop++;
-            console.log("boucle = " + loop)
+            window.loop++;
+            console.log("boucle = " + window.loop)
             if (window.cycle === cycle) {
                 console.log(window.cycle);
+                colorCycleBoxes(window.cycle, "done")
                 console.log('pomodoro done');
             } else {
-                timer(timer_working_time, timer_restting_time, cycle, loop);
-
+                timer(timer_working_time, timer_restting_time, cycle, window.loop);
             }
-
-
         }
 
-    }, 200);
+    }, 1000);
 
 }
 
 /**
  * Function to check whether a number is even or odd (useful to distinguish worktime and resttime on pomodoro timer)
  * Typically, odd loop = worktime ; even loop = resttime
- * @param {integer} number 
- * @returns {boolean}
+ * @param {number} number 
+ * @returns boolean
  */
 function evenOrNot(number) {
     if (number % 2 === 0) {
@@ -132,7 +137,37 @@ function evenOrNot(number) {
     }
 }
 
+/**
+ * Function to style a cycle box when a pomodoro cycle is completed
+ * @param {number} cycle 
+ * @param {string} status
+ * @returns void
+ */
+function colorCycleBoxes(cycle, status) {
+    switch (status) {
+        case "current":
+            color = 'yellow';
+            break;
 
-function colorCycleBoxes(cycle) {
-    document.getElementById("cycle " + cycle).style.backgroundColor = 'yellow';
+        case "done":
+            color = 'green';
+            break;
+    }
+    if (document.getElementById("cycle " + cycle)) {
+        document.getElementById("cycle " + cycle).style.backgroundColor = color;
+    }
+}
+
+/**
+ * Function to add a "0" before number when the number is strictly smaller than 10
+ * @param {number} number
+ * @returns mixed
+ */
+function addZeroWhenUnderTen(number) {
+    if (number < 10) {
+        return "0" + number;
+
+    } else {
+        return number;
+    }
 }
