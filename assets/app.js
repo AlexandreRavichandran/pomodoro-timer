@@ -1,15 +1,17 @@
+document.addEventListener("DOMContentLoaded", function (event) {
+    displayPomodoroInformations("Pomodoro_25/5");
+});
 
 document.getElementById("25/5").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_25/5")
 });
 document.getElementById("30/10").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_30/10")
+    displayPomodoroInformations("Pomodoro_30/10");
 });
 document.getElementById("45/15").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_45/15")
+    displayPomodoroInformations("Pomodoro_45/15");
 });
 document.getElementById("50/10").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_50/10")
+    displayPomodoroInformations("Pomodoro_50/10");
 });
 
 
@@ -90,12 +92,18 @@ function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
     if (evenOrNot(window.loop)) {
         document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_restting_time);
         console.log("pause cycle " + window.cycle)
+        showAlert("resttime", "worktime");
+        clicksoundButton();
+
     } else {
         document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_working_time);
         window.cycle++;
         colorCycleBoxes(window.cycle, "current")
         colorCycleBoxes(window.cycle - 1, "done")
         console.log("work cycle " + window.cycle)
+        showAlert("worktime", "restime");
+        clicksoundButton();
+
     }
     let sec = 00;
     window.inter = setInterval(() => {
@@ -114,12 +122,13 @@ function timer(timer_working_time, timer_restting_time, cycle, loop = 1) {
                 console.log(window.cycle);
                 colorCycleBoxes(window.cycle, "done")
                 console.log('pomodoro done');
+                showAlert("end", "worktime");
             } else {
                 timer(timer_working_time, timer_restting_time, cycle, window.loop);
             }
         }
 
-    }, 1000);
+    }, 200);
 
 }
 
@@ -170,4 +179,69 @@ function addZeroWhenUnderTen(number) {
     } else {
         return number;
     }
+}
+
+
+/**
+ * Function to update the alert following the current loop
+ * The previous status variable is useful to delete the previous background
+ * @param {string} status 
+ * @param {string} previous_status 
+ */
+function showAlert(status, previous_status) {
+    let alert;
+    let previous_background;
+    switch (status) {
+
+        case "worktime":
+            alert = "Phase de travail !";
+            background = "warning"
+            break;
+
+        case "resttime":
+            alert = "STOP ! Phase de pause ! ";
+            background = "success"
+            break;
+
+        case "end":
+            alert = "POMODORO terminé ! Félicitations ! ";
+            background = "danger"
+            break;
+    }
+    switch (previous_status) {
+
+        case "start":
+            previous_background = "info"
+            break;
+
+        case "worktime":
+            previous_background = "warning"
+            break;
+
+        case "resttime":
+            previous_background = "success"
+            break;
+
+        case "end":
+            previous_background = "danger"
+            break;
+    }
+
+    let alertBox = document.getElementById("alert");
+    alertBox.style.display = "block";
+    if (previous_status != null) {
+        alertBox.classList.remove("bg-" + previous_background);
+    }
+    alertBox.classList.add("bg-" + background);
+    alertBox.innerHTML = alert;
+}
+
+function playAudio() {
+    let audio = document.getElementById("audio");
+    audio.play();
+}
+
+function clicksoundButton() {
+    let button = document.getElementById("activateAudio");
+    button.click();
 }
