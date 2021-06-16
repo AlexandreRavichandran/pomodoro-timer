@@ -80,6 +80,7 @@ require_once('functions.php');
             </div>
         </div>
     </div>
+    <?php include('partials/_footer.php') ?>
     <script src="assets/app.js"></script>
 </body>
 

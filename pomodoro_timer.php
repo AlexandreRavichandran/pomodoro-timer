@@ -20,16 +20,20 @@ $selectedPomodoro = [
 </head>
 
 <body>
-    <div class="container mt-4">
+    <?php include('partials/_header.php') ?>
+    <div class="container">
         <div class="row">
             <h1 class="text-center"> POMODORO </h1>
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row mb-2">
             <ul class="d-flex flex-row justify-content-center">
                 <?php addCycleBoxes($selectedPomodoro['cycle']) ?>
             </ul>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <p id="alert" class="p-4 w-75 rounded text-center text-white h4"></p>
         </div>
         <div class="row">
             <img src="http://placehold.it/1000x300" alt="">
@@ -48,6 +52,13 @@ $selectedPomodoro = [
                 <button id="pomodoro_stop_button" class="btn btn-danger"> Arreter le pomodoro </button>
             </div>
         </div>
+    </div>
+    <?php include('partials/_footer.php') ?>
+    <div class="audio">
+        <audio id="audio">
+            <source src="medias/audio/boucle_end_sound.ogg" type="audio/ogg">
+        </audio>
+        <button onclick="playAudio()" id="activateAudio"> oui</button>
     </div>
 
     <script src="assets/app.js"></script>
