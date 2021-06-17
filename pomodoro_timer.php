@@ -14,7 +14,7 @@ $selectedPomodoro = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pomodoro-timer</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/app.css">
 </head>
@@ -35,9 +35,9 @@ $selectedPomodoro = [
         <div class="row d-flex justify-content-center">
             <p id="alert" class="p-4 w-75 rounded text-center text-white h4"></p>
         </div>
-        <div class="row pictures">
+        <!--<div class="row pictures">
             <img src="http://placehold.it/1000x300" alt="">
-        </div>
+        </div>-->
         <div class="row">
             <p id="cycle_timer" class="text-center"><span id="pomodoro_cycle_hour">00</span> : <span id="pomodoro_cycle_minute"><?php echo $selectedPomodoro['worktime'] ?></span> : <span id="pomodoro_cycle_second">00</span></p>
         </div>
@@ -66,7 +66,7 @@ $selectedPomodoro = [
         let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
         let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        countdownTimer(1, 1, 4);
+        countdownTimer(worktime, resttime, cycle);
         totalTimer();
     </script>
 
