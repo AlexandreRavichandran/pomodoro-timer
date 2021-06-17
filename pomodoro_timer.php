@@ -1,11 +1,11 @@
 <?php
 require_once('functions.php');
-/*$selectedPomodoro = [
+$selectedPomodoro = [
     "name" => htmlspecialchars($_POST['selected_pomodoro_name']),
     "worktime" => htmlspecialchars($_POST['selected_pomodoro_worktime']),
     "resttime" => htmlspecialchars($_POST['selected_pomodoro_resttime']),
     "cycle" => htmlspecialchars($_POST['selected_pomodoro_cycle']),
-]*/
+]
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -63,9 +63,9 @@ require_once('functions.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="assets/app.js"></script>
     <script>
-        //let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
-        //let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
-        //let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
+        let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
+        let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
+        let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
         countdownTimer(1, 1, 4);
         totalTimer();
     </script>

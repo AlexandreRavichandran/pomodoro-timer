@@ -265,7 +265,7 @@ function clicksoundButton() {
 // AJAX functions 
 
 /**
- * AJAX function to get datas about pomodoro when we click on each button (datas on Json file)
+ * AJAX function to get datas about pomodoro when we click on each button (datas on JSON file)
  * @param {string} pomodoro_name
  */
 function displayPomodoroInformations(pomodoro_name) {
