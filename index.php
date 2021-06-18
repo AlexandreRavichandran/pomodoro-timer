@@ -30,7 +30,7 @@ require_once('functions.php');
                 <div class="row mt-4">
                     <h2 class="text-center border-bottom border-black  pb-2 ">Fonctionnement</h2>
                     <p class="paragraph pt-2">La technique POMODORO est simple. Il existe differents types de pomodoro dit "standards" :</p>
-                    <ul class="list-group text-center pomodoro_list">
+                    <ul class="list-group text-center pomodoroList">
                         <li class="list-item mb-2"><strong>Pomodoro 25/5</strong>, qui correspond a un enchainement de 25 minutes de temps de travail, avec 5 minutes de pause, le tout 5 fois;</li>
                         <li class="list-item mb-2"><strong>Pomodoro 30/10</strong>, qui correspond a un enchainement de 30 minutes de temps de travail, avec 10 minutes de pause, le tout 5 fois;</li>
                         <li class="list-item mb-2"><strong>Pomodoro 45/15</strong>, qui correspond a un enchainement de 45 minutes de temps de travail, avec 15 minutes de pause, le tout 5 fois;</li>

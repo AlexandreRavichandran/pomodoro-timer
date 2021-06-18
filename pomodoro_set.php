@@ -22,49 +22,80 @@ require_once('functions.php');
     <div class="container">
         <p class="paragraph">Voici les POMODORO les plus populaires : </p>
         <div class="row justify-content-center">
-            <div class="col-xs-12 col-md-2 mr-2 mt-4 d-flex justify-content-center">
+            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="25/5" class="btn btn-danger pomodoroButton"> POMODORO 25/5</button>
             </div>
-            <div class="col-xs-12 col-md-2 mr-2 mt-4 d-flex justify-content-center">
+            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="30/10" class="btn btn-danger pomodoroButton"> POMODORO 30/10</button>
             </div>
-            <div class="col-xs-12 col-md-2 mr-2 mt-4 d-flex justify-content-center">
+            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="45/15" class="btn btn-danger pomodoroButton"> POMODORO 45/15</button>
             </div>
-            <div class="col-xs-12 col-md-2 mr-2 mt-4 d-flex justify-content-center">
+            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="50/10" class="btn btn-danger pomodoroButton"> POMODORO 50/10</button>
             </div>
-            <div class="col-xs-12 col-md-2 mr-2 mt-4 d-flex justify-content-center">
+            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="personalized" class="btn btn-danger pomodoroButton"> PERSONNALISE </button>
             </div>
         </div>
         <div class="row mt-4">
             <p id="remplir" class="text-center paragraph"> Choisissez un pomodoro pour avoir les détails sur celui ci . </p>
-            <p id="pomodoro_explaination" class="paragraph">Ce pomodoro se compose de <span class="selected_pomodoro_cycle"></span> cycles. Un cycle se compose de <span class="selected_pomodoro_worktime"></span> minutes de travail, ainsi que <span class="selected_pomodoro_restime"></span> minutes de pause.</p>
+        </div>
+        <div class="row m-4 " id="personalizedForm">
+            <div class="bg-white rounded pr-2 pl-2 pt-2 pb-5 ml-auto mr-auto">
+                <h4 class="text-center">Indiquez les paramètres de votre pomodoro ! </h4>
+                <form action="#" class="d-flex justify-content-center mt-4">
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="p-2 text-right" for="workTime">Donnez vous une période de travail : </label>
+                            </td>
+                            <td>
+                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedWorkTime">
+                            </td>
+                        </tr>
+                        <tr class="mt-4">
+                            <td>
+                                <label class="p-2 text-right" for="workTime">Donnez vous une période de pause : </label>
+                            </td>
+                            <td>
+                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedRestTime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="p-2 text-right" for="workTime">Donnez vous un cycle : </label>
+                            </td>
+                            <td>
+                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedCycle">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
         <div class="row mt-5">
             <table class="me-auto ms-auto border border-dark w-50 p-4 bg-white">
                 <tbody>
                     <tr class="mb-2 p-4">
                         <th class="p-4">POMODORO selectionné </th>
-                        <td class=" text-center selected_pomodoro_name p-4">
+                        <td class=" text-center selectedPomodoroName p-4">
                         </td>
                     </tr>
                     <tr class="mb-2 p-4">
                         <th class="p-4">Temps de travail (minutes)</th>
-                        <td class=" text-center selected_pomodoro_worktime p-4">
+                        <td class=" text-center selectedPomodoroWorkTime p-4">
                         </td>
                     </tr>
                     <tr class="mb-2">
                         <th class="p-4">Temps de pause (minutes)</th>
-                        <td class=" text-center selected_pomodoro_restime p-4">
+                        <td class=" text-center selectedPomodoroRestTime p-4">
 
                         </td>
                     </tr>
                     <tr class="mb-2">
                         <th class="p-4">Cycle</th>
-                        <td class=" text-center selected_pomodoro_cycle p-4">
-
+                        <td class=" text-center selectedPomodoroCycle p-4">
                         </td>
                     </tr>
                 </tbody>
@@ -72,16 +103,17 @@ require_once('functions.php');
         </div>
 
         <div class="row mt-4">
-            <p class="total_time text-center paragraph">Durée totale du pomodoro :</p>
-            <p id="total_time" class="text-center"></p>
+            <p id="pomodoroExplaination" class="paragraph text-center">Ce pomodoro se compose de <span class="selectedPomodoroCycle"></span> cycles. Un cycle se compose de <span class="selectedPomodoroWorkTime"></span> minutes de travail, ainsi que <span class="selectedPomodoroRestTime"></span> minutes de pause.</p>
+            <p class="totalTime text-center paragraph">Durée totale du pomodoro :</p>
+            <p id="totalTime" class="text-center"></p>
         </div>
         <div class="row">
             <div class="col">
-                <form action="pomodoro_timer.php" method="post" id="pomodoro_sending_form" class="d-flex justify-content-center mt-4">
-                    <input id="selected_pomodoro_name" type='hidden' name='selected_pomodoro_name' value='#'>
-                    <input id="selected_pomodoro_worktime" type='hidden' name='selected_pomodoro_worktime' value='#'>
-                    <input id="selected_pomodoro_restime" type='hidden' name='selected_pomodoro_resttime' value='#'>
-                    <input id="selected_pomodoro_cycle" type='hidden' name='selected_pomodoro_cycle' value='#'>
+                <form action="pomodoro_timer.php" method="post" id="pomodoroSendingForm" class="d-flex justify-content-center mt-4">
+                    <input id="selectedPomodoroName" type='hidden' name='selectedPomodoroName' value='#'>
+                    <input id="selectedPomodoroWorkTime" type='hidden' name='selectedPomodoroWorkTime' value='#'>
+                    <input id="selectedPomodoroRestTime" type='hidden' name='selectedPomodoroRestTime' value='#'>
+                    <input id="selectedPomodoroCycle" type='hidden' name='selectedPomodoroCycle' value='#'>
                     <button type='submit' class=" btn btn-primary"> Commencer le Pomodoro</button>
                 </form>
             </div>

@@ -4,7 +4,7 @@ body{
     font-family:  Arial, sans-serif;
     background-color: #FDEBAC;
 }
-.paragraph, .pomodoro_list li{
+.paragraph, .pomodoroList li{
     font-family:  Arial, sans-serif;
     font-size:1.2em;
 }
@@ -19,25 +19,25 @@ strong{
     text-decoration: underline;
     color:rgb(221, 121, 121);
 }
-tbody tr .selected_pomodoro_name,
-tbody tr .selected_pomodoro_worktime,
-tbody tr .selected_pomodoro_restime,
-tbody tr .selected_pomodoro_cycle{
+tbody tr .selectedPomodoroName,
+tbody tr .selectedPomodoroWorkTime,
+tbody tr .selectedPomodoroRestTime,
+tbody tr .selectedPomodoroCycle{
     font-size:1.3em;
     border:1px solid black;
 }
 
 
-#total_time{
+#totalTime{
     font-size:3em;
 }
 
-#cycle_timer{
+#cycleTimer{
     font-size:8em;
 }
 
 
-.step_number{
+.stepNumber{
     list-style-type: none;
     font-weight: bold;
     background-color: white;
@@ -47,7 +47,10 @@ tbody tr .selected_pomodoro_cycle{
     display:none;
 }
 
-.pomodoro_list li{
+#personalizedForm{
+    display:none;
+}
+.pomodoroList li{
 list-style-type: none;
 }
 
@@ -59,14 +62,14 @@ list-style-type: none;
 
         font-size:2.1em;
     }
-    .pomodoro_list li{
+    .pomodoroList li{
         font-size:1.4em;
         
     }
-    #pomodoro_explaination{
+    #pomodoroExplaination{
         font-size:2.1em;
     }
-    .step_number{
+    .stepNumber{
         list-style-type: none;
         font-weight: bold;
         font-size:2em;

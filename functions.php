@@ -20,8 +20,6 @@ function addActiveClassNavbar($pageName)
 function addCycleBoxes($cycle)
 {
     for ($i = 1; $i < $cycle + 1; $i++) {
-        echo '<li id="cycle ' . $i . '" class="rounded border p-3 m-3 step_number">' . $i . '</li>';
+        echo '<li id="cycle ' . $i . '" class="rounded border p-3 m-3 stepNumber">' . $i . '</li>';
     }
 }
-
-

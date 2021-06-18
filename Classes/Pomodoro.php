@@ -33,13 +33,13 @@ class Pomodoro
         return $getData->fetch();
     }
 
-    public function addNewPomodoro(string $name, int $worktime, int $resttime, int $cycle)
+    public function addNewPomodoro(string $name, int $workTime, int $restTime, int $cycle)
     {
         $postData = $this->db->prepare('INSERT INTO pomodoro(name,work_time,rest_time,cycle) VALUES(:name,:work_time,:rest_time,cycle)');
         $postData->execute([
             'name' => $name,
-            'work_time' => $worktime,
-            'rest_time' => $resttime,
+            'work_time' => $workTime,
+            'rest_time' => $restTime,
             'cycle' => $cycle
         ]);
     }

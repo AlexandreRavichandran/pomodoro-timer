@@ -1,13 +1,13 @@
 <?php
 require_once('functions.php');
-if (!isset($_POST['selected_pomodoro_name'])) {
+if (!isset($_POST['selectedPomodoroName'])) {
     header('Location:pomodoro_set.php');
 }
 $selectedPomodoro = [
-    "name" => htmlspecialchars($_POST['selected_pomodoro_name']),
-    "worktime" => htmlspecialchars($_POST['selected_pomodoro_worktime']),
-    "resttime" => htmlspecialchars($_POST['selected_pomodoro_resttime']),
-    "cycle" => htmlspecialchars($_POST['selected_pomodoro_cycle']),
+    "name" => htmlspecialchars($_POST['selectedPomodoroName']),
+    "workTime" => htmlspecialchars($_POST['selectedPomodoroWorkTime']),
+    "restTime" => htmlspecialchars($_POST['selectedPomodoroRestTime']),
+    "cycle" => htmlspecialchars($_POST['selectedPomodoroCycle']),
 ]
 ?>
 <!DOCTYPE html>
@@ -42,17 +42,17 @@ $selectedPomodoro = [
             <img src="http://placehold.it/1000x300" alt="">
         </div>-->
         <div class="row">
-            <p id="cycle_timer" class="text-center"><span id="pomodoro_cycle_hour">00</span> : <span id="pomodoro_cycle_minute"><?php echo $selectedPomodoro['worktime'] ?></span> : <span id="pomodoro_cycle_second">00</span></p>
+            <p id="cycleTimer" class="text-center"><span id="pomodoroCycleHour">00</span> : <span id="pomodoroCycleMinute"><?php echo $selectedPomodoro['workTime'] ?></span> : <span id="pomodoroCycleSecond">00</span></p>
         </div>
         <div class="row">
-            <p id="total_time" class="text-center">Temps total : <span id="pomodoro_total_hour">00</span> : <span id="pomodoro_total_minute">00</span> : <span id="pomodoro_total_second">00</span></p>
+            <p id="totalTime" class="text-center">Temps total : <span id="pomodoroTotalHour">00</span> : <span id="pomodoroTotalMinute">00</span> : <span id="pomodoroTotalSecond">00</span></p>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-end">
-                <button onclick="pomodoroPause('pause')" id="pomodoro_pause_button" class="btn btn-warning"> Mettre en pause </button>
+                <button onclick="pomodoroPause('pause')" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
             </div>
             <div class="col d-flex justify-content-start">
-                <button id="pomodoro_stop_button" class="btn btn-danger"> Arreter le pomodoro </button>
+                <button id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
             </div>
         </div>
     </div>
@@ -66,10 +66,10 @@ $selectedPomodoro = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="assets/app.js"></script>
     <script>
-        let worktime = <?php echo $selectedPomodoro['worktime'] ?>;
-        let resttime = <?php echo $selectedPomodoro['resttime'] ?>;
+        let workTime = <?php echo $selectedPomodoro['workTime'] ?>;
+        let restTime = <?php echo $selectedPomodoro['restTime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        countdownTimer(worktime, resttime, cycle);
+        countdownTimer(1, 1, 7);
         totalTimer();
     </script>
 

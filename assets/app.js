@@ -18,7 +18,25 @@ document.getElementById("50/10").addEventListener("click", function () {
     displayPomodoroInformations("50/10");
 });
 
+document.getElementById("personalized").addEventListener('click', function () {
 
+    document.getElementById("personalizedForm").style.display = "block";
+})
+
+document.getElementById("personalizedRestTime").addEventListener('change', function (e) {
+    managePersonalizedPomodoroForm('RestTime', 'RestTime');
+    console.log("ok");
+})
+
+function managePersonalizedPomodoroForm(target, time) {
+
+    document.getElementById("selectedPomodoroRestTime").setAttribute("value", document.getElementById('personalized' + time).value);
+
+    for (let i = 0; i < 2; i++) {
+        document.getElementsByClassName('selectedPomodoro' + target)[i].innerHTML = document.getElementById('personalized' + time).value;
+
+    }
+}
 
 // FUNCTIONS LIBRARY
 
@@ -26,15 +44,15 @@ document.getElementById("50/10").addEventListener("click", function () {
 
 /**
  * Function to convert minutes into a hours format (H:i:s)
- * @param {number} total_time 
+ * @param {number} totalTime 
  * @returns string
  */
-function convertMinutesToHours(total_time) {
-    let hours = Math.floor(total_time / 60);
-    let minutes = total_time % 60;
+function convertMinutesToHours(totalTime) {
+    let hours = Math.floor(totalTime / 60);
+    let minutes = totalTime % 60;
 
-    let converted_hours = hours + " h " + minutes + " m.";
-    return converted_hours;
+    let convertedHours = hours + " h " + minutes + " m.";
+    return convertedHours;
 }
 
 /**
@@ -70,44 +88,44 @@ function addZeroWhenUnderTen(number) {
 /**
  * Function to apply the countdown timer following a workting time, resting time, number of cycles and automatically setted loop
  * 
- * @param {number} timer_working_time 
- * @param {number} timer_restting_time 
+ * @param {number} timerWorkingTime 
+ * @param {number} timerResttingTime 
  * @param {number} cycle 
  * @param {number} loop  //setted automatically
  * @returns void
  */
-function countdownTimer(timer_working_time, timer_restting_time, cycle, loop = 1) {
+function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
     window.loop = loop;
     if (!window.cycle) {
         window.cycle = 0;
         console.log('initialization')
     }
     if (evenOrNot(window.loop)) {
-        document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_restting_time);
+        document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(timerResttingTime);
         console.log("pause cycle " + window.cycle)
-        showAlert("resttime", "worktime");
+        showAlert("restTime", "workTime");
         clicksoundButton();
 
     } else {
-        document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(timer_working_time);
+        document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(timerWorkingTime);
         window.cycle++;
         colorCycleBoxes(window.cycle, "current")
         colorCycleBoxes(window.cycle - 1, "done")
         console.log("work cycle " + window.cycle)
-        showAlert("worktime", "restime");
+        showAlert("workTime", "restTime");
         clicksoundButton();
 
     }
     let sec = 00;
     window.inter = setInterval(function () {
         sec--;
-        document.getElementById('pomodoro_cycle_second').innerHTML = addZeroWhenUnderTen(sec);
+        document.getElementById('pomodoroCycleSecond').innerHTML = addZeroWhenUnderTen(sec);
         if (sec < 0) {
             sec = 59;
-            document.getElementById('pomodoro_cycle_second').innerHTML = addZeroWhenUnderTen(sec);
-            document.getElementById('pomodoro_cycle_minute').innerHTML = addZeroWhenUnderTen(document.getElementById('pomodoro_cycle_minute').innerHTML - 1);
+            document.getElementById('pomodoroCycleSecond').innerHTML = addZeroWhenUnderTen(sec);
+            document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(document.getElementById('pomodoroCycleMinute').innerHTML - 1);
         }
-        if (document.getElementById('pomodoro_cycle_second').innerHTML == 0 && document.getElementById('pomodoro_cycle_minute').innerHTML == 0) {
+        if (document.getElementById('pomodoroCycleSecond').innerHTML == 0 && document.getElementById('pomodoroCycleMinute').innerHTML == 0) {
             clearInterval(inter);
             window.loop++;
             console.log("boucle = " + window.loop)
@@ -115,14 +133,14 @@ function countdownTimer(timer_working_time, timer_restting_time, cycle, loop = 1
                 console.log(window.cycle);
                 colorCycleBoxes(window.cycle, "done")
                 console.log('pomodoro done');
-                showAlert("end", "worktime");
-                clearInterval(window.total_time);
+                showAlert("end", "workTime");
+                clearInterval(window.totalTime);
             } else {
-                countdownTimer(timer_working_time, timer_restting_time, cycle, window.loop);
+                countdownTimer(timerWorkingTime, timerResttingTime, cycle, window.loop);
             }
         }
 
-    }, 1000);
+    }, 200);
 
 }
 
@@ -133,10 +151,10 @@ function totalTimer() {
     let sec = 0;
     let minute = 0;
     let hour = 0;
-    let second_space = document.getElementById("pomodoro_total_second");
-    let minute_space = document.getElementById('pomodoro_total_minute');
-    let hour_space = document.getElementById('pomodoro_total_hour');
-    window.total_time = setInterval(function () {
+    let secondSpace = document.getElementById("pomodoroTotalSecond");
+    let minuteSpace = document.getElementById('pomodoroTotalMinute');
+    let hourSpace = document.getElementById('pomodoroTotalHour');
+    window.totalTime = setInterval(function () {
         sec++;
         if (sec > 59) {
             sec = 0;
@@ -144,15 +162,15 @@ function totalTimer() {
             if (minute > 59) {
                 minute = 0;
                 hour++;
-                hour_space.innerHTML = addZeroWhenUnderTen(hour);
+                hourSpace.innerHTML = addZeroWhenUnderTen(hour);
             }
-            minute_space.innerHTML = addZeroWhenUnderTen(minute);
+            minuteSpace.innerHTML = addZeroWhenUnderTen(minute);
         }
-        second_space.innerHTML = addZeroWhenUnderTen(sec);
+        secondSpace.innerHTML = addZeroWhenUnderTen(sec);
 
 
 
-    }, 1000)
+    }, 200)
 
 }
 
@@ -183,19 +201,19 @@ function colorCycleBoxes(cycle, status) {
  * Function to update the alert following the current loop
  * The previous status variable is useful to delete the previous background
  * @param {string} status 
- * @param {string} previous_status 
+ * @param {string} previousStatus 
  */
-function showAlert(status, previous_status) {
+function showAlert(status, previousStatus) {
     let alert;
-    let previous_background;
+    let previousBackground;
     switch (status) {
 
-        case "worktime":
+        case "workTime":
             alert = "Phase de travail !";
             background = "warning"
             break;
 
-        case "resttime":
+        case "restTime":
             alert = "STOP ! Phase de pause ! ";
             background = "success"
             break;
@@ -205,29 +223,29 @@ function showAlert(status, previous_status) {
             background = "danger"
             break;
     }
-    switch (previous_status) {
+    switch (previousStatus) {
 
         case "start":
-            previous_background = "info"
+            previousBackground = "info"
             break;
 
-        case "worktime":
-            previous_background = "warning"
+        case "workTime":
+            previousBackground = "warning"
             break;
 
-        case "resttime":
-            previous_background = "success"
+        case "restTime":
+            previousBackground = "success"
             break;
 
         case "end":
-            previous_background = "danger"
+            previousBackground = "danger"
             break;
     }
 
     let alertBox = document.getElementById("alert");
     alertBox.style.display = "block";
-    if (previous_status != null) {
-        alertBox.classList.remove("bg-" + previous_background);
+    if (previousStatus != null) {
+        alertBox.classList.remove("bg-" + previousBackground);
     }
     alertBox.classList.add("bg-" + background);
     alertBox.innerHTML = alert;
@@ -257,28 +275,30 @@ function clicksoundButton() {
 
 /**
  * AJAX function to get datas about pomodoro when we click on each button (datas on JSON file)
- * @param {string} pomodoro_name
+ * @param {string} pomodoroName
  */
-function displayPomodoroInformations(pomodoro_name) {
+function displayPomodoroInformations(pomodoroName) {
 
     let xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "ajaxManager.php?name=" + pomodoro_name);
+    xhttp.open("GET", "ajaxManager.php?name=" + pomodoroName);
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == "200") {
             let infos = JSON.parse(xhttp.responseText);
-            document.getElementsByClassName("selected_pomodoro_name")[0].innerHTML = infos["name"];
+            console.log(infos);
+            document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = infos["name"];
+            document.getElementById("personalizedForm").style.display = "none";
             for (let i = 0; i < 2; i++) {
-                document.getElementsByClassName("selected_pomodoro_worktime")[i].innerHTML = infos["work_time"];
-                document.getElementsByClassName("selected_pomodoro_restime")[i].innerHTML = infos["rest_time"];
-                document.getElementsByClassName("selected_pomodoro_cycle")[i].innerHTML = infos["cycle"];
-                document.getElementById("selected_pomodoro_name").setAttribute("value", pomodoro_name);
-                document.getElementById("selected_pomodoro_worktime").setAttribute("value", infos["work_time"]);
-                document.getElementById("selected_pomodoro_restime").setAttribute("value", infos["rest_time"]);
-                document.getElementById("selected_pomodoro_cycle").setAttribute("value", infos["cycle"]);
-                let total_time = (infos["work_time"] * infos["cycle"] + infos["rest_time"] * (infos["cycle"] - 1))
-                document.getElementById("total_time").innerHTML = convertMinutesToHours(total_time);
+                document.getElementsByClassName("selectedPomodoroWorkTime")[i].innerHTML = infos["work_time"];
+                document.getElementsByClassName("selectedPomodoroRestTime")[i].innerHTML = infos["rest_time"];
+                document.getElementsByClassName("selectedPomodoroCycle")[i].innerHTML = infos["cycle"];
+                document.getElementById("selectedPomodoroName").setAttribute("value", pomodoroName);
+                document.getElementById("selectedPomodoroWorkTime").setAttribute("value", infos["work_time"]);
+                document.getElementById("selectedPomodoroRestTime").setAttribute("value", infos["rest_time"]);
+                document.getElementById("selectedPomodoroCycle").setAttribute("value", infos["cycle"]);
+                let totalTime = (infos["work_time"] * infos["cycle"] + infos["rest_time"] * (infos["cycle"] - 1))
+                document.getElementById("totalTime").innerHTML = convertMinutesToHours(totalTime);
             }
         }
 
