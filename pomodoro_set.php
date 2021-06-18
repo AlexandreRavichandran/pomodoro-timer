@@ -15,7 +15,7 @@ require_once('functions.php');
 </head>
 
 <body>
-    <?php include_once('partials/_header.php'); ?>
+    <?php require('partials/_header.php'); ?>
     <div class="container mt-4 border-bottom mb-4">
         <h1 class="text-center"> POMODORO-TIMER</h1>
     </div>
@@ -47,23 +47,30 @@ require_once('functions.php');
                 <tbody>
                     <tr class="mb-2 p-4">
                         <th class="p-4">POMODORO selectionné </th>
-                        <td class=" text-center selected_pomodoro_name p-4"></td>
+                        <td class=" text-center selected_pomodoro_name p-4">
+                        </td>
                     </tr>
                     <tr class="mb-2 p-4">
                         <th class="p-4">Temps de travail (minutes)</th>
-                        <td class=" text-center selected_pomodoro_worktime p-4"></td>
+                        <td class=" text-center selected_pomodoro_worktime p-4">
+                        </td>
                     </tr>
                     <tr class="mb-2">
                         <th class="p-4">Temps de pause (minutes)</th>
-                        <td class=" text-center selected_pomodoro_restime p-4"></td>
+                        <td class=" text-center selected_pomodoro_restime p-4">
+
+                        </td>
                     </tr>
                     <tr class="mb-2">
                         <th class="p-4">Cycle</th>
-                        <td class=" text-center selected_pomodoro_cycle p-4"></td>
+                        <td class=" text-center selected_pomodoro_cycle p-4">
+
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
         <div class="row mt-4">
             <p class="total_time text-center paragraph">Durée totale du pomodoro :</p>
             <p id="total_time" class="text-center"></p>
@@ -80,7 +87,7 @@ require_once('functions.php');
             </div>
         </div>
     </div>
-    <?php include('partials/_footer.php') ?>
+    <?php require('partials/_footer.php') ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="assets/app.js"></script>
 </body>

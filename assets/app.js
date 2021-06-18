@@ -1,3 +1,6 @@
+
+//EVENT LISTENERS 
+
 document.addEventListener("DOMContentLoaded", function (event) {
     displayPomodoroInformations("25/5");
 });
@@ -14,18 +17,6 @@ document.getElementById("45/15").addEventListener("click", function () {
 document.getElementById("50/10").addEventListener("click", function () {
     displayPomodoroInformations("50/10");
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -46,11 +46,10 @@ tbody tr .selected_pomodoro_cycle{
 #alert{
     display:none;
 }
+
 .pomodoro_list li{
 list-style-type: none;
 }
-
-
 
 @media (max-width:1000px) {
     body{

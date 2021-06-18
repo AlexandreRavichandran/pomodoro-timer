@@ -1,5 +1,8 @@
 <?php
 require_once('functions.php');
+if (!isset($_POST['selected_pomodoro_name'])) {
+    header('Location:pomodoro_set.php');
+}
 $selectedPomodoro = [
     "name" => htmlspecialchars($_POST['selected_pomodoro_name']),
     "worktime" => htmlspecialchars($_POST['selected_pomodoro_worktime']),
@@ -20,7 +23,7 @@ $selectedPomodoro = [
 </head>
 
 <body>
-    <?php include('partials/_header.php') ?>
+    <?php require('partials/_header.php') ?>
     <div class="container">
         <div class="row">
             <h1 class="text-center"> POMODORO </h1>
@@ -53,7 +56,7 @@ $selectedPomodoro = [
             </div>
         </div>
     </div>
-    <?php include('partials/_footer.php') ?>
+    <?php require('partials/_footer.php') ?>
     <div class="audio">
         <audio id="audio">
             <source src="medias/audio/boucle_end_sound.ogg" type="audio/ogg">
