@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-    displayPomodoroInformations("Pomodoro_25/5");
+    displayPomodoroInformations("25/5");
 });
 
 document.getElementById("25/5").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_25/5");
+    displayPomodoroInformations("25/5");
 });
 document.getElementById("30/10").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_30/10");
+    displayPomodoroInformations("30/10");
 });
 document.getElementById("45/15").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_45/15");
+    displayPomodoroInformations("45/15");
 });
 document.getElementById("50/10").addEventListener("click", function () {
-    displayPomodoroInformations("Pomodoro_50/10");
+    displayPomodoroInformations("50/10");
 });
 
 
@@ -271,22 +271,22 @@ function clicksoundButton() {
 function displayPomodoroInformations(pomodoro_name) {
 
     let xhttp = new XMLHttpRequest();
-    xhttp.overrideMimeType("application/json");
-    xhttp.open("GET", "pomodoroinformations.json");
+
+    xhttp.open("GET", "ajaxManager.php?name=" + pomodoro_name);
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == "200") {
             let infos = JSON.parse(xhttp.responseText);
-            document.getElementsByClassName("selected_pomodoro_name")[0].innerHTML = infos[pomodoro_name]["name"];
+            document.getElementsByClassName("selected_pomodoro_name")[0].innerHTML = infos["name"];
             for (let i = 0; i < 2; i++) {
-                document.getElementsByClassName("selected_pomodoro_worktime")[i].innerHTML = infos[pomodoro_name]["worktime"];
-                document.getElementsByClassName("selected_pomodoro_restime")[i].innerHTML = infos[pomodoro_name]["resttime"];
-                document.getElementsByClassName("selected_pomodoro_cycle")[i].innerHTML = infos[pomodoro_name]["cycle"];
+                document.getElementsByClassName("selected_pomodoro_worktime")[i].innerHTML = infos["work_time"];
+                document.getElementsByClassName("selected_pomodoro_restime")[i].innerHTML = infos["rest_time"];
+                document.getElementsByClassName("selected_pomodoro_cycle")[i].innerHTML = infos["cycle"];
                 document.getElementById("selected_pomodoro_name").setAttribute("value", pomodoro_name);
-                document.getElementById("selected_pomodoro_worktime").setAttribute("value", infos[pomodoro_name]["worktime"]);
-                document.getElementById("selected_pomodoro_restime").setAttribute("value", infos[pomodoro_name]["resttime"]);
-                document.getElementById("selected_pomodoro_cycle").setAttribute("value", infos[pomodoro_name]["cycle"]);
-                let total_time = (infos[pomodoro_name]["worktime"] * infos[pomodoro_name]["cycle"] + infos[pomodoro_name]["resttime"] * (infos[pomodoro_name]["cycle"] - 1))
+                document.getElementById("selected_pomodoro_worktime").setAttribute("value", infos["work_time"]);
+                document.getElementById("selected_pomodoro_restime").setAttribute("value", infos["rest_time"]);
+                document.getElementById("selected_pomodoro_cycle").setAttribute("value", infos["cycle"]);
+                let total_time = (infos["work_time"] * infos["cycle"] + infos["rest_time"] * (infos["cycle"] - 1))
                 document.getElementById("total_time").innerHTML = convertMinutesToHours(total_time);
             }
         }
