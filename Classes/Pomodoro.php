@@ -15,8 +15,8 @@ class Pomodoro
     {
         try {
             // To test, you have to use this db connection function
-            $db = new PDO('mysql:host=localhost;dbname=pomodoro-timer;charset=utf8', 'root', 'root');
-            //$db = new PDO('mysql:host=us-cdbr-east-04.cleardb.com;dbname=heroku_e3143e370808540;charset=utf8', 'b70301025e38da', '15bca50c');
+            //$db = new PDO('mysql:host=localhost;dbname=pomodoro-timer;charset=utf8', 'root', 'root');
+            $db = new PDO('mysql:host=us-cdbr-east-04.cleardb.com;dbname=heroku_e3143e370808540;charset=utf8', 'b70301025e38da', '15bca50c');
         } catch (Exception $e) {
             echo 'Une erreur s\'est produite' . $e->getMessage();
         }
