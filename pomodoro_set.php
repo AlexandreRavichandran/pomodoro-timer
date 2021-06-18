@@ -41,8 +41,8 @@ require_once('functions.php');
         <div class="row mt-4">
             <p id="remplir" class="text-center paragraph"> Choisissez un pomodoro pour avoir les détails sur celui ci . </p>
         </div>
-        <div class="row m-4 " id="personalizedForm">
-            <div class="bg-white rounded pr-2 pl-2 pt-2 pb-5 ml-auto mr-auto">
+        <div class="row m-4" id="personalizedForm">
+            <div style="width:95%" class="bg-white rounded pr-2 pl-2 pt-4 pb-5 ml-auto mr-auto">
                 <h4 class="text-center">Indiquez les paramètres de votre pomodoro ! </h4>
                 <form action="#" class="d-flex justify-content-center mt-4">
                     <table>
@@ -75,11 +75,11 @@ require_once('functions.php');
             </div>
         </div>
         <div class="row mt-5">
-            <table class="me-auto ms-auto border border-dark w-50 p-4 bg-white">
+            <table style="width:80%" class="me-auto ms-auto border border-dark p-4 bg-white">
                 <tbody>
                     <tr class="mb-2 p-4">
                         <th class="p-4">POMODORO selectionné </th>
-                        <td class=" text-center selectedPomodoroName p-4">
+                        <td class="text-center selectedPomodoroName p-4">
                         </td>
                     </tr>
                     <tr class="mb-2 p-4">

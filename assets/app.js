@@ -19,24 +19,22 @@ document.getElementById("50/10").addEventListener("click", function () {
 });
 
 document.getElementById("personalized").addEventListener('click', function () {
-
     document.getElementById("personalizedForm").style.display = "block";
+    document.getElementById("personalizedForm").classList.add = "d-flex justify-content-center";
 })
 
 document.getElementById("personalizedRestTime").addEventListener('change', function (e) {
-    managePersonalizedPomodoroForm('RestTime', 'RestTime');
-    console.log("ok");
+    managePersonalizedPomodoroForm('RestTime');
 })
 
-function managePersonalizedPomodoroForm(target, time) {
+document.getElementById("personalizedWorkTime").addEventListener('change', function (e) {
+    managePersonalizedPomodoroForm('WorkTime');
+})
+document.getElementById("personalizedCycle").addEventListener('change', function (e) {
+    managePersonalizedPomodoroForm('Cycle');
+})
 
-    document.getElementById("selectedPomodoroRestTime").setAttribute("value", document.getElementById('personalized' + time).value);
 
-    for (let i = 0; i < 2; i++) {
-        document.getElementsByClassName('selectedPomodoro' + target)[i].innerHTML = document.getElementById('personalized' + time).value;
-
-    }
-}
 
 // FUNCTIONS LIBRARY
 
@@ -140,7 +138,7 @@ function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
             }
         }
 
-    }, 200);
+    }, 1000);
 
 }
 
@@ -170,7 +168,7 @@ function totalTimer() {
 
 
 
-    }, 200)
+    }, 1000)
 
 }
 
@@ -307,7 +305,21 @@ function displayPomodoroInformations(pomodoroName) {
 }
 
 
+// Form manage functions
+/**
+ * Function used when user choose to personalize his pomodoro.
+ * Useful to update the recap table just below the personalisation form
+ * @param {string} field Put the argument with camel case AND Capitalize first Letter (i.e MyVariable or Variable)
+ */
+function managePersonalizedPomodoroForm(field) {
 
+    document.getElementById("selectedPomodoro" + field).setAttribute("value", document.getElementById('personalized' + field).value);
+
+    for (let i = 0; i < 2; i++) {
+        document.getElementsByClassName('selectedPomodoro' + field)[i].innerHTML = document.getElementById('personalized' + field).value;
+
+    }
+}
 
 
 

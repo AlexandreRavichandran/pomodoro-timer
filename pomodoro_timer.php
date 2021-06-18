@@ -31,7 +31,7 @@ $selectedPomodoro = [
     </div>
     <div class="container">
         <div class="row mb-2">
-            <ul class="d-flex flex-row justify-content-center">
+            <ul class="d-flex flex-row flex-wrap justify-content-center">
                 <?php addCycleBoxes($selectedPomodoro['cycle']) ?>
             </ul>
         </div>
@@ -69,7 +69,7 @@ $selectedPomodoro = [
         let workTime = <?php echo $selectedPomodoro['workTime'] ?>;
         let restTime = <?php echo $selectedPomodoro['restTime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
-        countdownTimer(1, 1, 7);
+        countdownTimer(workTime, restTime, cycle);
         totalTimer();
     </script>
 
