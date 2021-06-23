@@ -21,17 +21,28 @@ document.getElementById("50/10").addEventListener("click", function () {
 document.getElementById("personalized").addEventListener('click', function () {
     document.getElementById("personalizedForm").style.display = "block";
     document.getElementById("personalizedForm").classList.add = "d-flex justify-content-center";
+    document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = 'Personnalisé';
+    document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML = 1;
+    document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML = 1;
+    document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML = 1;
+    calculateTotalPomodoroTime();
 })
 
-document.getElementById("personalizedRestTime").addEventListener('change', function (e) {
+document.getElementById("personalizedRestTime").addEventListener('input', function () {
     managePersonalizedPomodoroForm('RestTime');
+    checkValue('RestTime');
+    calculateTotalPomodoroTime();
 })
 
-document.getElementById("personalizedWorkTime").addEventListener('change', function (e) {
+document.getElementById("personalizedWorkTime").addEventListener('input', function (e) {
     managePersonalizedPomodoroForm('WorkTime');
+    checkValue('WorkTime');
+    calculateTotalPomodoroTime();
 })
-document.getElementById("personalizedCycle").addEventListener('change', function (e) {
+document.getElementById("personalizedCycle").addEventListener('input', function (e) {
     managePersonalizedPomodoroForm('Cycle');
+    checkValue('Cycle');
+    calculateTotalPomodoroTime();
 })
 
 
@@ -43,14 +54,18 @@ document.getElementById("personalizedCycle").addEventListener('change', function
 /**
  * Function to convert minutes into a hours format (H:i:s)
  * @param {number} totalTime 
- * @returns string
+ * @param {boolean} separatedValue //set true if the returned hours and minutes have to be separated/in a string
+ * @returns mixed
  */
-function convertMinutesToHours(totalTime) {
+function convertMinutesToHours(totalTime, separatedValue = false) {
     let hours = Math.floor(totalTime / 60);
     let minutes = totalTime % 60;
-
-    let convertedHours = hours + " h " + minutes + " m.";
-    return convertedHours;
+    if (separatedValue === false) {
+        let convertedHours = hours + " h " + minutes + " m";
+        return convertedHours;
+    } else {
+        return convertedHours = [hours, minutes];
+    }
 }
 
 /**
@@ -285,9 +300,7 @@ function displayPomodoroInformations(pomodoroName) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == "200") {
             let infos = JSON.parse(xhttp.responseText);
-            console.log(infos);
             document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = infos["name"];
-            document.getElementById("personalizedForm").style.display = "none";
             for (let i = 0; i < 2; i++) {
                 document.getElementsByClassName("selectedPomodoroWorkTime")[i].innerHTML = infos["work_time"];
                 document.getElementsByClassName("selectedPomodoroRestTime")[i].innerHTML = infos["rest_time"];
@@ -296,9 +309,9 @@ function displayPomodoroInformations(pomodoroName) {
                 document.getElementById("selectedPomodoroWorkTime").setAttribute("value", infos["work_time"]);
                 document.getElementById("selectedPomodoroRestTime").setAttribute("value", infos["rest_time"]);
                 document.getElementById("selectedPomodoroCycle").setAttribute("value", infos["cycle"]);
-                let totalTime = (infos["work_time"] * infos["cycle"] + infos["rest_time"] * (infos["cycle"] - 1))
-                document.getElementById("totalTime").innerHTML = convertMinutesToHours(totalTime);
+                calculateTotalPomodoroTime();
             }
+            document.getElementById("personalizedForm").style.display = "none";
         }
 
     }
@@ -320,17 +333,67 @@ function managePersonalizedPomodoroForm(field) {
         document.getElementsByClassName('selectedPomodoro' + field)[i].innerHTML = document.getElementById('personalized' + field).value;
 
     }
+
 }
 
+/**
+ * Function to calculate the total pomodoro time 
+ * Used when a pomoodoro is choosed or when a pomodoro is setted with personalized form
+ * @returns mixed
+ */
+function calculateTotalPomodoroTime() {
+    let workTime = document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML;
+    let restTime = document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML;
+    let cycle = document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML;
+    let totalTime = workTime * cycle + restTime * (cycle - 1);
+    if (totalTime >= 0) {
+        document.getElementById("totalTime").innerHTML = convertMinutesToHours(totalTime);
+    } else {
+        document.getElementById("totalTime").innerHTML = '';
+    }
+}
 
+/**
+ * Function used to check if values inputed in the personalized pomodoro form are correct
+ * Checked parameters :
+ *      - Worktime and Restime must be numbers between 1 and 59 included,
+ *      - Cycle must be a number vetween 1 and 20 included
+ * @param {string} field Put the argument with camel case AND Capitalize first Letter (i.e MyVariable or Variable)
+ * @returns void
+ */
+function checkValue(field) {
+    let elementToCheck = document.getElementById('personalized' + field);
+    if (field === 'WorkTime' || field === 'RestTime') {
+        if (!isNaN(elementToCheck.value) && (elementToCheck.value <= 0 || elementToCheck.value > 59)) {
+            error = 'La période de travail et de pause d\'un cycle doit etre compris entre 1 et 59 minutes.';
+            elementToCheck.style.backgroundColor = 'yellow';
 
+        } else if (isNaN(elementToCheck.value)) {
+            error = 'Les perodes de travail et de pause doivent etre des nombres.';
+            elementToCheck.style.backgroundColor = 'yellow';
+        } else {
+            error = '';
+            elementToCheck.style.backgroundColor = '';
+        }
+    } else if (field === 'Cycle') {
+        if (!isNaN(elementToCheck.value) && (elementToCheck.value <= 0 || elementToCheck.value > 20)) {
+            error = 'La valeur du cycle doit etre compris entre 1 et 20 cycles.';
+            elementToCheck.style.backgroundColor = 'yellow';
+        } else {
+            error = '';
+            elementToCheck.style.backgroundColor = '';
+        }
+    }
+    document.getElementById('errorMessage' + field).innerHTML = error;
+    if (error != '') {
+        document.getElementById('submitButton').classList.add('disabled');
+    } else {
+        document.getElementById('submitButton').classList.remove('disabled');
+    }
+}
 
-
-
-
-
-
-
-
-
-
+/**
+* Envoyer à la même page en cas de problème
+* Rajouter les htmlspecialchars quand on envoie les requêtes Ajax pour chercher les valeurs
+* Envoyer les bonnes valeur au moment du submit et non avec le hidden
+*/

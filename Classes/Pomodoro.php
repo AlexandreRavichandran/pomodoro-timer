@@ -43,4 +43,5 @@ class Pomodoro
             'cycle' => $cycle
         ]);
     }
+
 }

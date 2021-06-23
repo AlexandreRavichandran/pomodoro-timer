@@ -47,27 +47,39 @@ require_once('functions.php');
                 <form action="#" class="d-flex justify-content-center mt-4">
                     <table>
                         <tr>
-                            <td>
-                                <label class="p-2 text-right" for="workTime">Donnez vous une période de travail : </label>
+                            <td class="d-flex justify-content-end">
+                                <label class="p-2 text-right" for="workTime">Donnez vous une période de travail (en minutes) : </label>
                             </td>
                             <td>
-                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedWorkTime">
-                            </td>
-                        </tr>
-                        <tr class="mt-4">
-                            <td>
-                                <label class="p-2 text-right" for="workTime">Donnez vous une période de pause : </label>
-                            </td>
-                            <td>
-                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedRestTime">
+                                <input class="p-2 text-center" min="1" type="number" name="workTime" id="personalizedWorkTime">
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label class="p-2 text-right" for="workTime">Donnez vous un cycle : </label>
+                            <td class="text-center text-danger" class="errorMessage" id="errorMessageWorkTime" colspan="2">
+                            </td>
+                        </tr>
+                        <tr class="mt-4">
+                            <td class="d-flex justify-content-end">
+                                <label class="p-2 text-right " for="restTime">Donnez vous une période de pause (en minutes) : </label>
                             </td>
                             <td>
-                                <input class="p-2 text-center" type="number" name="workTime" id="personalizedCycle">
+                                <input class="p-2 text-center" min="1" type="number" name="restTime" id="personalizedRestTime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-danger" class="errorMessage" id="errorMessageRestTime" colspan="2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex justify-content-end">
+                                <label class="p-2" for="cycle">Donnez vous un cycle : </label>
+                            </td>
+                            <td>
+                                <input class="p-2 text-center" min="1" type="number" name="cycle" id="personalizedCycle">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-danger" class="errorMessage" id="errorMessageCycle" colspan="2">
                             </td>
                         </tr>
                     </table>
@@ -110,11 +122,11 @@ require_once('functions.php');
         <div class="row">
             <div class="col">
                 <form action="pomodoro_timer.php" method="post" id="pomodoroSendingForm" class="d-flex justify-content-center mt-4">
-                    <input id="selectedPomodoroName" type='hidden' name='selectedPomodoroName' value='#'>
-                    <input id="selectedPomodoroWorkTime" type='hidden' name='selectedPomodoroWorkTime' value='#'>
-                    <input id="selectedPomodoroRestTime" type='hidden' name='selectedPomodoroRestTime' value='#'>
-                    <input id="selectedPomodoroCycle" type='hidden' name='selectedPomodoroCycle' value='#'>
-                    <button type='submit' class=" btn btn-primary"> Commencer le Pomodoro</button>
+                    <input id="selectedPomodoroName" type="hidden" name="selectedPomodoroName" value="#">
+                    <input id="selectedPomodoroWorkTime" type="hidden" name="selectedPomodoroWorkTime" value="#">
+                    <input id="selectedPomodoroRestTime" type="hidden" name="selectedPomodoroRestTime" value="#">
+                    <input id="selectedPomodoroCycle" type="hidden" name="selectedPomodoroCycle" value="#">
+                    <button type="submit" id="submitButton" class="btn btn-primary"> Commencer le Pomodoro</button>
                 </form>
             </div>
         </div>
