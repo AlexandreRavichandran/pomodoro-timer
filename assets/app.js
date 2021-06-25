@@ -111,7 +111,7 @@ function addZeroWhenUnderTen(number) {
  * @returns void
  */
 function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
-    document.getElementById("startPomodoroButton").style.display = "none";
+    document.getElementById("pomodoroStartButton").style.display = "none";
     window.loop = loop;
     if (!window.cycle) {
         window.cycle = 0;
