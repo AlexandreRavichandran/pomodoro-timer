@@ -16,6 +16,7 @@ class Pomodoro
         try {
             // To test, you have to use this db connection function
             //$db = new PDO('mysql:host=localhost;dbname=pomodoro-timer;charset=utf8', 'root', 'root');
+
             $db = new PDO('mysql:host=' . $_ENV['HOST'] . ';dbname=' .  $_ENV['DB_NAME'] . ';charset=utf8', $_ENV['USERNAME'], $_ENV['PASSWORD']);
         } catch (Exception $e) {
             echo 'Une erreur s\'est produite' . $e->getMessage();
@@ -23,9 +24,15 @@ class Pomodoro
         return $db;
     }
 
-
+    /**
+     * Function called by Ajax function to show pomodoro informations
+     *
+     * @param string $name
+     * @return void
+     */
     public function getPomodoroInformations(string $name)
     {
+        $name = htmlspecialchars($name);
         $getData = $this->db->prepare('SELECT * FROM pomodoro WHERE name = :name');
         $getData->execute([
             'name' => $name
@@ -33,6 +40,15 @@ class Pomodoro
         return $getData->fetch();
     }
 
+    /**
+     * Function to add a new pomodoro on the database
+     *
+     * @param string $name
+     * @param integer $workTime
+     * @param integer $restTime
+     * @param integer $cycle
+     * @return void
+     */
     public function addNewPomodoro(string $name, int $workTime, int $restTime, int $cycle)
     {
         $postData = $this->db->prepare('INSERT INTO pomodoro(name,work_time,rest_time,cycle) VALUES(:name,:work_time,:rest_time,cycle)');

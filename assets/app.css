@@ -53,7 +53,9 @@ tbody tr .selectedPomodoroCycle{
 .pomodoroList li{
 list-style-type: none;
 }
-
+#redirectionNewPomodoro{
+    display: none;
+}
 @media (max-width:1000px) {
     body{
         font-size: 10px;

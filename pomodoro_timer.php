@@ -1,8 +1,14 @@
 <?php
 require_once('functions.php');
-if (!isset($_POST['selectedPomodoroName'])) {
+if (
+    !isset($_POST) ||
+    htmlspecialchars($_POST['selectedPomodoroWorkTime']) > 59 || htmlspecialchars($_POST['selectedPomodoroWorkTime']) < 1 ||
+    htmlspecialchars($_POST['selectedPomodoroRestTime']) > 59 || htmlspecialchars($_POST['selectedPomodoroRestTime']) < 1 ||
+    htmlspecialchars($_POST['selectedPomodoroCycle']) > 20 || htmlspecialchars($_POST['selectedPomodoroCycle']) < 1
+) {
     header('Location:pomodoro_set.php');
 }
+
 $selectedPomodoro = [
     "name" => htmlspecialchars($_POST['selectedPomodoroName']),
     "workTime" => htmlspecialchars($_POST['selectedPomodoroWorkTime']),
@@ -49,7 +55,7 @@ $selectedPomodoro = [
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <button id="startPomodoroButton" onclick="totalTimer();countdownTimer(workTime, restTime, cycle)" class="btn btn-primary beforePomodoro"> Demarrer le Pomodoro ! </button>
+                <button id="pomodoroStartButton" onclick="totalTimer();countdownTimer(workTime, restTime, cycle)" class="btn btn-primary beforePomodoro"> Demarrer le Pomodoro ! </button>
             </div>
         </div>
         <div class="row mt-3">
@@ -57,25 +63,26 @@ $selectedPomodoro = [
                 <button onclick="pomodoroPause('pause')" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
             </div>
             <div class="col d-flex justify-content-start">
-                <button id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
+                <button onclick="stopPomodoroTimer(<?php echo $selectedPomodoro['cycle'] ?>)" id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
+            </div>
+            <div class="div d-flex justify-content-center mt-4">
+                <a id="redirectionNewPomodoro" href="pomodoro_set.php" class="btn btn-primary w-25">Recreer un nouveau pomodoro </a>
             </div>
         </div>
     </div>
-    <?php require('partials/_footer.php') ?>
+
     <div class="audio">
         <audio id="audio">
             <source src="medias/audio/boucle_end_sound.ogg" type="audio/ogg">
         </audio>
         <button class="d-none" onclick="playAudio()" id="activateAudio"></button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="assets/app.js"></script>
+    <?php require('partials/_footer.php') ?>
     <script>
         let workTime = <?php echo $selectedPomodoro['workTime'] ?>;
         let restTime = <?php echo $selectedPomodoro['restTime'] ?>;
         let cycle = <?php echo $selectedPomodoro['cycle'] ?>;
     </script>
-
 </body>
 
 </html>

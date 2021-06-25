@@ -21,28 +21,31 @@ document.getElementById("50/10").addEventListener("click", function () {
 document.getElementById("personalized").addEventListener('click', function () {
     document.getElementById("personalizedForm").style.display = "block";
     document.getElementById("personalizedForm").classList.add = "d-flex justify-content-center";
-    document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = 'Personnalisé';
-    document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML = 1;
-    document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML = 1;
-    document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML = 1;
+    document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = "Personnalisé";
+    document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML = "";
+    document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML = "";
+    document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML = "";
+    checkValue('WorkTime');
+    checkValue('RestTime');
+    checkValue('Cycle');
     calculateTotalPomodoroTime();
 })
 
 document.getElementById("personalizedRestTime").addEventListener('input', function () {
-    managePersonalizedPomodoroForm('RestTime');
+    // managePersonalizedPomodoroForm('RestTime');
     checkValue('RestTime');
-    calculateTotalPomodoroTime();
+    // calculateTotalPomodoroTime();
 })
 
 document.getElementById("personalizedWorkTime").addEventListener('input', function (e) {
-    managePersonalizedPomodoroForm('WorkTime');
+    // managePersonalizedPomodoroForm('WorkTime');
     checkValue('WorkTime');
-    calculateTotalPomodoroTime();
+    // calculateTotalPomodoroTime();
 })
 document.getElementById("personalizedCycle").addEventListener('input', function (e) {
-    managePersonalizedPomodoroForm('Cycle');
+    // managePersonalizedPomodoroForm('Cycle');
     checkValue('Cycle');
-    calculateTotalPomodoroTime();
+    // calculateTotalPomodoroTime();
 })
 
 
@@ -188,6 +191,30 @@ function totalTimer() {
 
 }
 
+/**
+ * Function to stop the countdown timer, the total timer, and show button to create a new pomodoro
+ * @param {integer} cycle 
+ */
+function stopPomodoroTimer(cycle) {
+
+    clearInterval(window.totalTime);
+    clearInterval(window.inter);
+    document.getElementById('pomodoroCycleHour').innerHTML = '00';
+    document.getElementById('pomodoroCycleMinute').innerHTML = '00';
+    document.getElementById('pomodoroCycleSecond').innerHTML = '00';
+    document.getElementById('pomodoroTotalHour').innerHTML = '00';
+    document.getElementById('pomodoroTotalMinute').innerHTML = '00';
+    document.getElementById('pomodoroTotalSecond').innerHTML = '00';
+    for (let i = 0; i < cycle + 1; i++) {
+        colorCycleBoxes(i, "done");
+    }
+    let alertBox = document.getElementById("alert");
+    alertBox.style.display = "none";
+    document.getElementById("pomodoroStartButton").style.display = "none";
+    document.getElementById("pomodoroPauseButton").style.display = "none";
+    document.getElementById("pomodoroStopButton").style.display = "none";
+    document.getElementById("redirectionNewPomodoro").style.display = "block";
+}
 // Design functions
 
 /**
@@ -312,6 +339,7 @@ function displayPomodoroInformations(pomodoroName) {
                 calculateTotalPomodoroTime();
             }
             document.getElementById("personalizedForm").style.display = "none";
+            document.getElementById('submitButton').classList.remove('disabled');
         }
 
     }
@@ -320,6 +348,7 @@ function displayPomodoroInformations(pomodoroName) {
 
 
 // Form manage functions
+
 /**
  * Function used when user choose to personalize his pomodoro.
  * Useful to update the recap table just below the personalisation form
@@ -327,10 +356,10 @@ function displayPomodoroInformations(pomodoroName) {
  */
 function managePersonalizedPomodoroForm(field) {
 
-    document.getElementById("selectedPomodoro" + field).setAttribute("value", document.getElementById('personalized' + field).value);
+    document.getElementById("selectedPomodoro" + field).setAttribute("value", Math.round(document.getElementById('personalized' + field).value));
 
     for (let i = 0; i < 2; i++) {
-        document.getElementsByClassName('selectedPomodoro' + field)[i].innerHTML = document.getElementById('personalized' + field).value;
+        document.getElementsByClassName('selectedPomodoro' + field)[i].innerHTML = Math.round(document.getElementById('personalized' + field).value);
 
     }
 
@@ -389,11 +418,10 @@ function checkValue(field) {
         document.getElementById('submitButton').classList.add('disabled');
     } else {
         document.getElementById('submitButton').classList.remove('disabled');
+        managePersonalizedPomodoroForm(field);
+        calculateTotalPomodoroTime();
     }
 }
 
-/**
-* Envoyer à la même page en cas de problème
-* Rajouter les htmlspecialchars quand on envoie les requêtes Ajax pour chercher les valeurs
-* Envoyer les bonnes valeur au moment du submit et non avec le hidden
-*/
+
+
