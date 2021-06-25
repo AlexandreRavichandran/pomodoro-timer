@@ -147,11 +147,10 @@ function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
             window.loop++;
             console.log("boucle = " + window.loop)
             if (window.cycle === cycle) {
-                console.log(window.cycle);
+                clicksoundButton();
                 colorCycleBoxes(window.cycle, "done")
-                console.log('pomodoro done');
                 showAlert("end", "workTime");
-                clearInterval(window.totalTime);
+                stopPomodoroTimer(window.cycle);
             } else {
                 countdownTimer(timerWorkingTime, timerResttingTime, cycle, window.loop);
             }
@@ -193,7 +192,7 @@ function totalTimer() {
 
 /**
  * Function to stop the countdown timer, the total timer, and show button to create a new pomodoro
- * @param {integer} cycle 
+ * @param {number} cycle 
  */
 function stopPomodoroTimer(cycle) {
 
@@ -214,6 +213,7 @@ function stopPomodoroTimer(cycle) {
     document.getElementById("pomodoroPauseButton").style.display = "none";
     document.getElementById("pomodoroStopButton").style.display = "none";
     document.getElementById("redirectionNewPomodoro").style.display = "block";
+    console.log('ok');
 }
 // Design functions
 

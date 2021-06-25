@@ -60,13 +60,13 @@ $selectedPomodoro = [
         </div>
         <div class="row mt-3">
             <div class="col d-flex justify-content-end">
-                <button onclick="pomodoroPause('pause')" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
+                <button onclick="pausePomodoroTimer('pause')" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
             </div>
             <div class="col d-flex justify-content-start">
                 <button onclick="stopPomodoroTimer(<?php echo $selectedPomodoro['cycle'] ?>)" id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
             </div>
             <div class="div d-flex justify-content-center mt-4">
-                <a id="redirectionNewPomodoro" href="pomodoro_set.php" class="btn btn-primary w-25">Recreer un nouveau pomodoro </a>
+                <a id="redirectionNewPomodoro" href="pomodoro_set.php" class="btn btn-primary">Recreer un nouveau pomodoro </a>
             </div>
         </div>
     </div>
