@@ -102,7 +102,10 @@ function addZeroWhenUnderTen(number) {
 // Timer functions 
 
 /**
- * Function to apply the countdown timer following a workting time, resting time, number of cycles and automatically setted loop
+ * Function to initialize the pomodoro Timer, verify the current cycle, current period (worktime of resttime) and calls timer for 
+ * the next period
+ * 
+ * This function is automatically called when the timer finished a period
  * 
  * @param {number} timerWorkingTime 
  * @param {number} timerResttingTime 
@@ -110,19 +113,23 @@ function addZeroWhenUnderTen(number) {
  * @param {number} loop  //setted automatically
  * @returns void
  */
-function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
+function pomodoroManager(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
     document.getElementById("pomodoroStartButton").style.display = "none";
+
+    //Initialization of the timer, happens when the timer starts
     window.loop = loop;
     if (!window.cycle) {
         window.cycle = 0;
         console.log('initialization')
     }
+    // Happens when we are on Pause cycle
     if (evenOrNot(window.loop)) {
         document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(timerResttingTime);
         console.log("pause cycle " + window.cycle)
         showAlert("restTime", "workTime");
         clicksoundButton();
 
+        // Happens when we are on working cycle
     } else {
         document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(timerWorkingTime);
         window.cycle++;
@@ -133,7 +140,25 @@ function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
         clicksoundButton();
 
     }
+
     let sec = 00;
+    // The timer 
+    timer(sec, timerWorkingTime, timerResttingTime, cycle);
+
+
+}
+/**
+ * Function to apply a the timer for one period (worktime of resttime). When the timer stops, il call the pomodoroManager function to check
+ * which period to call next
+ * @param {number} sec 
+ * @param {number} timerWorkingTime 
+ * @param {number} timerResttingTime 
+ * @param {number} cycle 
+ */
+function timer(sec, timerWorkingTime, timerResttingTime, cycle) {
+    document.getElementById("pomodoroPauseButton").style.visibility = "initial";
+    document.getElementById("pomodoroResumeButton").style.visibility = "hidden";
+
     window.inter = setInterval(function () {
         sec--;
         document.getElementById('pomodoroCycleSecond').innerHTML = addZeroWhenUnderTen(sec);
@@ -142,26 +167,42 @@ function countdownTimer(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
             document.getElementById('pomodoroCycleSecond').innerHTML = addZeroWhenUnderTen(sec);
             document.getElementById('pomodoroCycleMinute').innerHTML = addZeroWhenUnderTen(document.getElementById('pomodoroCycleMinute').innerHTML - 1);
         }
+        //Checking if the current cycle is stopped
         if (document.getElementById('pomodoroCycleSecond').innerHTML == 0 && document.getElementById('pomodoroCycleMinute').innerHTML == 0) {
             clearInterval(inter);
             window.loop++;
             console.log("boucle = " + window.loop)
+            //checking if all cycles are done
+            console.log(cycle);
             if (window.cycle === cycle) {
                 clicksoundButton();
                 colorCycleBoxes(window.cycle, "done")
                 showAlert("end", "workTime");
+                console.log('Pomodoro terminé');
                 stopPomodoroTimer(window.cycle);
             } else {
-                countdownTimer(timerWorkingTime, timerResttingTime, cycle, window.loop);
+                pomodoroManager(timerWorkingTime, timerResttingTime, cycle, window.loop);
             }
         }
 
-    }, 1000);
-
+    }, 200);
 }
+
+function pausePomodoroTimer() {
+
+    clearInterval(window.inter);
+    remainingSeconds = document.getElementById('pomodoroCycleSecond').innerHTML;
+    document.getElementById('pomodoroResumeButton')
+        .setAttribute('onclick', 'timer(' + remainingSeconds + ', workTime, restTime, cycle)')
+    document.getElementById('pomodoroResumeButton').style.visibility = "initial";
+    document.getElementById('pomodoroPauseButton').style.visibility = "hidden";
+    console.log('paused');
+}
+
 
 /**
  * Function to apply the timer to display the total pomodoro time
+ * This timer never stops, even if the user press the pause button
  */
 function totalTimer() {
     let sec = 0;
@@ -191,7 +232,7 @@ function totalTimer() {
 }
 
 /**
- * Function to stop the countdown timer, the total timer, and show button to create a new pomodoro
+ * Function to stop the pomodoro timer, the total timer, and show button to create a new pomodoro
  * @param {number} cycle 
  */
 function stopPomodoroTimer(cycle) {
