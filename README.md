@@ -17,7 +17,6 @@ https://www.mamp.info/en/downloads/ <br>
 # How to use
 After forked and cloned the project, don't forget to create a database on MySQL and import the pomodoro.sql file on it.
 
-Need help to do things above ? You can see details about installation [here](/docs/howtoinstall.md "Click here to have details about how to install requirements") .
 
 
 
