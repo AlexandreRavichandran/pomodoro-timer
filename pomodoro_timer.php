@@ -54,19 +54,27 @@ $selectedPomodoro = [
             <p id="totalTime" class="text-center">Temps total : <span id="pomodoroTotalHour">00</span> : <span id="pomodoroTotalMinute">00</span> : <span id="pomodoroTotalSecond">00</span></p>
         </div>
         <div class="row">
-            <div class="col d-flex justify-content-center">
+            <div class="col d-flex justify-content-center mt-4">
                 <button id="pomodoroStartButton" onclick="totalTimer();pomodoroManager(workTime, restTime, cycle)" class="btn btn-primary beforePomodoro"> Demarrer le Pomodoro ! </button>
             </div>
         </div>
-        <div class="row mt-3 d-flex justify-content-center ">
-            
+        <div class="row mt-3">
+            <div class="col d-flex justify-content-center mt-4">
+                <button onclick="pausePomodoroTimer()" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col d-flex justify-content-center mt-4">
+                <button onclick="" id="pomodoroResumeButton" class="btn btn-success"> Reprendre </button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col d-flex justify-content-center mt-4">
+                <button onclick="stopPomodoroTimer(<?php echo $selectedPomodoro['cycle'] ?>)" id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
+            </div>
         </div>
     </div>
-
-    <button onclick="pausePomodoroTimer()" id="pomodoroPauseButton" class="btn btn-warning"> Mettre en pause </button>
-    <button onclick="" id="pomodoroResumeButton" class="btn btn-warning"> Reprendre </button>
-    <button onclick="stopPomodoroTimer(<?php echo $selectedPomodoro['cycle'] ?>)" id="pomodoroStopButton" class="btn btn-danger"> Arreter le pomodoro </button>
-    <div class="div d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4">
         <a id="redirectionNewPomodoro" href="pomodoro_set.php" class="btn btn-primary">Recreer un nouveau pomodoro </a>
     </div>
     <div class="audio">

@@ -156,8 +156,8 @@ function pomodoroManager(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
  * @param {number} cycle 
  */
 function timer(sec, timerWorkingTime, timerResttingTime, cycle) {
-    document.getElementById("pomodoroPauseButton").style.visibility = "initial";
-    document.getElementById("pomodoroResumeButton").style.visibility = "hidden";
+    document.getElementById("pomodoroPauseButton").style.display = "block";
+    document.getElementById("pomodoroResumeButton").style.display = "none";
 
     window.inter = setInterval(function () {
         sec--;
@@ -194,8 +194,8 @@ function pausePomodoroTimer() {
     remainingSeconds = document.getElementById('pomodoroCycleSecond').innerHTML;
     document.getElementById('pomodoroResumeButton')
         .setAttribute('onclick', 'timer(' + remainingSeconds + ', workTime, restTime, cycle)')
-    document.getElementById('pomodoroResumeButton').style.visibility = "initial";
-    document.getElementById('pomodoroPauseButton').style.visibility = "hidden";
+    document.getElementById('pomodoroResumeButton').style.display = "block";
+    document.getElementById('pomodoroPauseButton').style.display = "none";
     console.log('paused');
 }
 
@@ -253,6 +253,7 @@ function stopPomodoroTimer(cycle) {
     document.getElementById("pomodoroStartButton").style.display = "none";
     document.getElementById("pomodoroPauseButton").style.display = "none";
     document.getElementById("pomodoroStopButton").style.display = "none";
+    document.getElementById('pomodoroResumeButton').style.display = "none";
     document.getElementById("redirectionNewPomodoro").style.display = "block";
     console.log('ok');
 }

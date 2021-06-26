@@ -55,6 +55,19 @@ list-style-type: none;
 }
 #redirectionNewPomodoro{
     display: none;
+    width:300px;
+}
+#pomodoroStartButton{
+    display:block;
+    width:224px;
+}
+#pomodoroPauseButton, #pomodoroResumeButton{
+    display:none;
+    width:224px;
+
+}
+#pomodoroStopButton{
+    width:224px;
 }
 @media (max-width:1000px) {
     body{
