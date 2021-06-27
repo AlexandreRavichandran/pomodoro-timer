@@ -5,7 +5,7 @@
  * @param string $pageName
  * @return void
  */
-function addActiveClassNavbar($pageName)
+function addActiveClassNavbar(string $pageName)
 {
     if ($_SERVER['REQUEST_URI'] === '/pomodoro-timer/' . $pageName . '.php') {
         echo "active";
@@ -17,7 +17,7 @@ function addActiveClassNavbar($pageName)
  * @param integer $cycle
  * @return void
  */
-function addCycleBoxes($cycle)
+function addCycleBoxes(int $cycle)
 {
     for ($i = 1; $i < $cycle + 1; $i++) {
         echo '<li id="cycle ' . $i . '" class="rounded border p-3 m-3 stepNumber">' . $i . '</li>';

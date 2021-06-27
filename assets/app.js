@@ -147,6 +147,7 @@ function pomodoroManager(timerWorkingTime, timerResttingTime, cycle, loop = 1) {
 
 
 }
+
 /**
  * Function to apply a the timer for one period (worktime of resttime). When the timer stops, il call the pomodoroManager function to check
  * which period to call next
@@ -188,6 +189,9 @@ function timer(sec, timerWorkingTime, timerResttingTime, cycle) {
     }, 200);
 }
 
+/**
+ * Function to pause the pomodoro timer
+ */
 function pausePomodoroTimer() {
 
     clearInterval(window.inter);
@@ -198,7 +202,6 @@ function pausePomodoroTimer() {
     document.getElementById('pomodoroPauseButton').style.display = "none";
     console.log('paused');
 }
-
 
 /**
  * Function to apply the timer to display the total pomodoro time
@@ -257,6 +260,7 @@ function stopPomodoroTimer(cycle) {
     document.getElementById("redirectionNewPomodoro").style.display = "block";
     console.log('ok');
 }
+
 // Design functions
 
 /**
