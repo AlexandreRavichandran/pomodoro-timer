@@ -186,7 +186,7 @@ function timer(sec, timerWorkingTime, timerResttingTime, cycle) {
             }
         }
 
-    }, 200);
+    }, 1000);
 }
 
 /**
