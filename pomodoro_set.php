@@ -10,8 +10,8 @@ require_once('functions.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POMODORO-timer - pomodoro</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/app.css">
-
 </head>
 
 <body>

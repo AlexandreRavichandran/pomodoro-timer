@@ -10,6 +10,7 @@ require_once('functions.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POMODORO-timer - Accueil</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/app.css">
 </head>
 
@@ -21,7 +22,7 @@ require_once('functions.php');
     </div>
     <div class="container mb-4 d-flex flex-column">
         <div class="row">
-            <div class="col-xs-12 col-lg-6 p-4  bg-white rounded ">
+            <div class="col-lg-6 p-4 bg-white rounded">
                 <div class="row">
                     <h2 class="text-center border-bottom border-black pb-2"> Pomodo...quoi? </h2>
                     <p class="paragraph pt-2">La technique POMODORO (ou tout simplement le pomodoro), est une technique de gestion de travail permettant d'optimiser au maximum la concentration. Elle se base sur une alternance entre un temps de travail et un temps de pause, durant un certain nombre de cycle.</p>
@@ -40,7 +41,7 @@ require_once('functions.php');
                 </div>
             </div>
             <div class="col-md-1"></div>
-            <div class="col-xs-12 col-lg-5  bg-white rounded d-flex flex-column align-self-center p-5 ml-2">
+            <div class=" col-lg-5  bg-white rounded d-flex flex-column align-self-center p-5 ml-2">
                 <h2 class="text-center"> Lancer le POMODORO Timer </h2>
                 <img src="images/clock.gif" alt="" class="d-block ml-auto mr-auto text-center">
                 <a href="pomodoro_set.php" class="btn btn-success d-block me-auto w-50 ms-auto mt-4"> Lancer le POMODORO Timer </a>
