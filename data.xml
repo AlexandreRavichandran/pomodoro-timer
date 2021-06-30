@@ -1,0 +1,26 @@
+<catalog>
+    <pomodoro type="25/5">
+        <name>Pomodoro 25/5</name>
+        <worktime>25</worktime>
+        <resttime>5</resttime>
+        <cycle>5</cycle>
+    </pomodoro>
+    <pomodoro type="30/10">
+        <name>Pomodoro 30/10</name>
+        <worktime>30</worktime>
+        <resttime>10</resttime>
+        <cycle>5</cycle>
+    </pomodoro>
+    <pomodoro type="45/15">
+        <name>Pomodoro 45/15</name>
+        <worktime>45</worktime>
+        <resttime>15</resttime>
+        <cycle>5</cycle>
+    </pomodoro>
+    <pomodoro type="50/10">
+        <name>Pomodoro 50/10</name>
+        <worktime>50</worktime>
+        <resttime>10</resttime>
+        <cycle>5</cycle>
+    </pomodoro>
+</catalog>

@@ -368,20 +368,26 @@ function displayPomodoroInformations(pomodoroName) {
 
     let xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "ajaxManager.php?name=" + pomodoroName);
+    xhttp.open("GET", "data.xml");
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == "200") {
-            let infos = JSON.parse(xhttp.responseText);
-            document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = infos["name"];
+            let infos = xhttp.responseText;
+            let parser = new DOMParser;
+            xml = parser.parseFromString(infos, "text/xml");
+            let name = xml.querySelector('pomodoro[type="' + pomodoroName + '"] name').innerHTML;
+            let worktime = xml.querySelector('pomodoro[type="' + pomodoroName + '"] worktime').innerHTML;
+            let resttime = xml.querySelector('pomodoro[type="' + pomodoroName + '"] resttime').innerHTML;
+            let cycle = xml.querySelector('pomodoro[type="' + pomodoroName + '"] cycle').innerHTML;
+            document.getElementsByClassName("selectedPomodoroName")[0].innerHTML = name;
             for (let i = 0; i < 2; i++) {
-                document.getElementsByClassName("selectedPomodoroWorkTime")[i].innerHTML = infos["work_time"];
-                document.getElementsByClassName("selectedPomodoroRestTime")[i].innerHTML = infos["rest_time"];
-                document.getElementsByClassName("selectedPomodoroCycle")[i].innerHTML = infos["cycle"];
+                document.getElementsByClassName("selectedPomodoroWorkTime")[i].innerHTML = worktime;
+                document.getElementsByClassName("selectedPomodoroRestTime")[i].innerHTML = resttime;
+                document.getElementsByClassName("selectedPomodoroCycle")[i].innerHTML = cycle;
                 document.getElementById("selectedPomodoroName").setAttribute("value", pomodoroName);
-                document.getElementById("selectedPomodoroWorkTime").setAttribute("value", infos["work_time"]);
-                document.getElementById("selectedPomodoroRestTime").setAttribute("value", infos["rest_time"]);
-                document.getElementById("selectedPomodoroCycle").setAttribute("value", infos["cycle"]);
+                document.getElementById("selectedPomodoroWorkTime").setAttribute("value", worktime);
+                document.getElementById("selectedPomodoroRestTime").setAttribute("value", resttime);
+                document.getElementById("selectedPomodoroCycle").setAttribute("value", cycle);
                 calculateTotalPomodoroTime();
             }
             document.getElementById("personalizedForm").style.display = "none";
@@ -391,7 +397,6 @@ function displayPomodoroInformations(pomodoroName) {
     }
     xhttp.send(null);
 }
-
 
 // Form manage functions
 
