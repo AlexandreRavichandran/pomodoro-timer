@@ -7,18 +7,11 @@ The website is available here : https://pomodoro--timer.herokuapp.com/
 # Requirements 
 - PHP > 7.4.1
 - Apache server
-- MySQL
+
 
 You can use MAMP stack to have all necessary requirements : 
 https://www.mamp.info/en/downloads/ <br>
 (I personnaly used it to develop this project )
-
-
-# How to use
-After forked and cloned the project, don't forget to create a database on MySQL and import the pomodoro.sql file on it.
-
-
-
 
 # Features
 - Use classic pomodoro pattern to upgrade your concentration when working on a certain task.<br>
