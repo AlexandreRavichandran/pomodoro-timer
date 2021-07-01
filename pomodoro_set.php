@@ -22,18 +22,7 @@ require_once('functions.php');
     <div class="container">
         <p class="paragraph">Voici les POMODORO les plus populaires : </p>
         <div class="row justify-content-center">
-            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
-                <button id="25/5" class="btn btn-danger pomodoroButton"> POMODORO 25/5</button>
-            </div>
-            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
-                <button id="30/10" class="btn btn-danger pomodoroButton"> POMODORO 30/10</button>
-            </div>
-            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
-                <button id="45/15" class="btn btn-danger pomodoroButton"> POMODORO 45/15</button>
-            </div>
-            <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
-                <button id="50/10" class="btn btn-danger pomodoroButton"> POMODORO 50/10</button>
-            </div>
+            <?php showStandardPomodoroButtons() ?>
             <div class="col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center">
                 <button id="personalized" class="btn btn-danger pomodoroButton"> PERSONNALISE </button>
             </div>

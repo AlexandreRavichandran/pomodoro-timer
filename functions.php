@@ -23,3 +23,24 @@ function addCycleBoxes(int $cycle)
         echo '<li id="cycle ' . $i . '" class="rounded border p-3 m-3 stepNumber">' . $i . '</li>';
     }
 }
+
+/**
+ * Function to automatically display all pomodoro button on setting page,
+ * following the content of the XML file
+ *
+ * @return void
+ */
+function showStandardPomodoroButtons()
+{
+    $xml = simplexml_load_file('data.xml');
+    foreach ($xml as $pomodoro => $value) {
+        $type = $value['type']->__toString();
+        $name = $value->name;
+        // the line below is used to manually add 
+        $type = '"' . $type . '"';
+        echo  "<div class='col-xs-12 col-lg-2 mr-2 mt-4 d-flex justify-content-center'>
+                <button onclick='displayPomodoroInformations(" . $type . ")' id='" . $type . "'
+                class='btn btn-danger pomodoroButton'>" . $name . "</button>
+                </div>";
+    }
+}

@@ -33,7 +33,6 @@ You can see details about features [here](/docs/features.md "Click here to have 
 
 
 # Coming features
-- Pause button to pause the pomodoro
 
 - Youtube API to listen a selected style of music when doing the pomodoro
 

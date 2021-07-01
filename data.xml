@@ -23,4 +23,15 @@
         <resttime>10</resttime>
         <cycle>5</cycle>
     </pomodoro>
+    <!--
+        Want to add another standard pomodoro? 
+        Make sure to respect the pattern like the pomodoro setted above
+
+
+     <pomodoro type="[ADD VALUE]"> //type = work-time/rest-time
+        <name>[ADD VALUE]</name>
+        <worktime>[ADD VALUE]</worktime>
+        <resttime>[ADD VALUE]</resttime>
+        <cycle>[ADD VALUE]</cycle>
+    </pomodoro> -->
 </catalog>

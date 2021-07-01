@@ -11,8 +11,8 @@
  * @returns mixed
  */
 function convertMinutesToHours(totalTime, separatedValue = false) {
-    let hours = Math.floor(totalTime / 60);
-    let minutes = totalTime % 60;
+    const hours = Math.floor(totalTime / 60);
+    const minutes = totalTime % 60;
     if (separatedValue === false) {
         let convertedHours = hours + " h " + minutes + " m";
         return convertedHours;
@@ -161,9 +161,9 @@ function totalTimer() {
     let sec = 0;
     let minute = 0;
     let hour = 0;
-    let secondSpace = document.getElementById("pomodoroTotalSecond");
-    let minuteSpace = document.getElementById('pomodoroTotalMinute');
-    let hourSpace = document.getElementById('pomodoroTotalHour');
+    const secondSpace = document.getElementById("pomodoroTotalSecond");
+    const minuteSpace = document.getElementById('pomodoroTotalMinute');
+    const hourSpace = document.getElementById('pomodoroTotalHour');
     window.totalTime = setInterval(function () {
         sec++;
         if (sec > 59) {
@@ -279,7 +279,7 @@ function showAlert(status, previousStatus) {
             break;
     }
 
-    let alertBox = document.getElementById("alert");
+    const alertBox = document.getElementById("alert");
     alertBox.style.display = "block";
     if (previousStatus != null) {
         alertBox.classList.remove("bg-" + previousBackground);
@@ -294,7 +294,7 @@ function showAlert(status, previousStatus) {
  * Function used to play the audio file when a loop is done 
  */
 function playAudio() {
-    let audio = document.getElementById("audio");
+    const audio = document.getElementById("audio");
     audio.play();
 }
 
@@ -304,7 +304,7 @@ function playAudio() {
  * https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
  */
 function clicksoundButton() {
-    let button = document.getElementById("activateAudio");
+    const button = document.getElementById("activateAudio");
     button.click();
 }
 
@@ -317,14 +317,13 @@ function clicksoundButton() {
 function displayPomodoroInformations(pomodoroName) {
 
     let xhttp = new XMLHttpRequest();
-
     xhttp.open("GET", "data.xml");
-
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == "200") {
             let infos = xhttp.responseText;
             let parser = new DOMParser;
             xml = parser.parseFromString(infos, "text/xml");
+            console.log(pomodoroName);
             let name = xml.querySelector('pomodoro[type="' + pomodoroName + '"] name').innerHTML;
             let worktime = xml.querySelector('pomodoro[type="' + pomodoroName + '"] worktime').innerHTML;
             let resttime = xml.querySelector('pomodoro[type="' + pomodoroName + '"] resttime').innerHTML;
@@ -372,10 +371,10 @@ function managePersonalizedPomodoroForm(field) {
  * @returns mixed
  */
 function calculateTotalPomodoroTime() {
-    let workTime = document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML;
-    let restTime = document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML;
-    let cycle = document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML;
-    let totalTime = workTime * cycle + restTime * (cycle - 1);
+    const workTime = document.getElementsByClassName("selectedPomodoroWorkTime")[0].innerHTML;
+    const restTime = document.getElementsByClassName("selectedPomodoroRestTime")[0].innerHTML;
+    const cycle = document.getElementsByClassName("selectedPomodoroCycle")[0].innerHTML;
+    const totalTime = workTime * cycle + restTime * (cycle - 1);
     if (totalTime >= 0) {
         document.getElementById("totalTime").innerHTML = convertMinutesToHours(totalTime);
     } else {
@@ -384,15 +383,18 @@ function calculateTotalPomodoroTime() {
 }
 
 /**
- * Function used to check if values inputed in the personalized pomodoro form are correct
+ * Function used to check if values inputed in the personalized pomodoro form are correct.
+ * Display error message if error detected
+ * 
  * Checked parameters :
- *      - Worktime and Restime must be numbers between 1 and 59 included,
- *      - Cycle must be a number vetween 1 and 20 included
+ *      
+ * - Worktime and Restime must be numbers between 1 and 59 included,
+ * - Cycle must be a number vetween 1 and 20 included
  * @param {string} field Put the argument with camel case AND Capitalize first Letter (i.e MyVariable or Variable)
  * @returns void
  */
 function checkValue(field) {
-    let elementToCheck = document.getElementById('personalized' + field);
+    const elementToCheck = document.getElementById('personalized' + field);
     if (field === 'WorkTime' || field === 'RestTime') {
         if (!isNaN(elementToCheck.value) && (elementToCheck.value <= 0 || elementToCheck.value > 59)) {
             error = 'La période de travail et de pause d\'un cycle doit etre compris entre 1 et 59 minutes.';
