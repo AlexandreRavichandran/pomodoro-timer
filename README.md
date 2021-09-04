@@ -29,21 +29,6 @@ ng time/resting time,
 
 - Showing the current cycle, the cycles already done and remaining cycle.
 
-You can see details about features [here](/docs/features.md "Click here to have details about features") .
-
-
-# Coming features
-
-- Youtube API to listen a selected style of music when doing the pomodoro
-
-- Admin 'back-office'
-
-- Advices displayed when user create his own pomodoro
-
-- Night mode
-- ...
-
-
 # Support
 
 If you have any questions, ideas, feedback, or anything else about this project, feel free to send me an email at alexandre.ravichandran@gmail.com .
