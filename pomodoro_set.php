@@ -121,6 +121,9 @@ require_once('functions.php');
         </div>
     </div>
     <?php require('partials/_footer.php') ?>
+    <script>
+        displayPomodoroInformations("25/5");
+    </script>
 </body>
 
 </html>

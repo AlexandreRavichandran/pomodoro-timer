@@ -2,13 +2,7 @@
     <nav class="navbar navbar-expand navbar-dark">
         <ul class="navbar-nav me-auto ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">A propos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Admin</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="mailto:alexandre.ravichandran@gmail.com">Contact</a>
             </li>
         </ul>
     </nav>
